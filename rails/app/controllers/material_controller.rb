@@ -1,4 +1,10 @@
 class MaterialController < ApplicationController
+  def list
+    @materials = Material
+                  .select(:id,:name,:alcohol_flag,:have_flag)
+                  .where("have_flag = ?", 1)
+  end
+
   def detail
     @material_detail = Material
                         .select(:id,:name,:alcohol_flag,:have_flag)

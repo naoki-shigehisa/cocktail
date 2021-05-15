@@ -1,0 +1,15 @@
+%html
+  %body
+    .m-3
+      %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
+        %h3 材料リスト
+        %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/recipe/list'"}
+          レシピへ
+      
+      %ul.list-group
+        - @materials.each do |m|
+          %a.list-group-item{href: "/material/detail/#{m.id}"}
+            - if m[:alcohol_flag]
+              %i.fa.fa-wine-glass-alt.text-dark
+            %span.text-dark.font-weight-bold
+              = m[:name]

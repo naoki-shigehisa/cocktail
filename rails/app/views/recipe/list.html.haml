@@ -3,15 +3,17 @@
     .m-3
       %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
         %h3 カクテルリスト
+        %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/material/list'"}
+          材料へ
       
-      %ul.list-group
-        %p.list-group-item.mb-3
+      %ul.list-group.mb-3
+        %p.list-group-item
           %span.text-dark.font-weight-bold
             カクテル名
           %br
           %span.text-muted.small
             = "スタイル　技法　アルコール"
-        
+      %ul.list-group  
         - @can_recipes.each do |r|
           %a.list-group-item{href: "/recipe/detail/#{r[:id]}"}
             %span.text-dark.font-weight-bold
