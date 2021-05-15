@@ -3,7 +3,7 @@ class RecipeController < ApplicationController
     @recipes = Recipe.select(:id,:name)
     @can_recipes = []
     @recipes.each{|recipe|
-      @have_flag = RecipeMaterial
+      have_flag = RecipeMaterial
         .select(:id,:recipe_id,:material_id,:option_flag)
         .includes(:material)
         .where("(recipe_id = ?) AND (option_flag = 0)", recipe.id)
@@ -11,7 +11,7 @@ class RecipeController < ApplicationController
           r.material.have_flag
         }
         .all? {|v| v }
-      if @have_flag
+      if have_flag
         @can_recipes << recipe
       end
     }
