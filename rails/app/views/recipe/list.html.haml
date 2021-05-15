@@ -1,10 +1,17 @@
 %h1 カクテルリスト
-%hr/ 
-%table.table
-  %tr 
-    %th id
-    %th name
-  -@can_recipes.each do |r|
-    %tr 
-      = content_tag :td, r.id
-      = content_tag :td, r.name
+
+%ul.list-group
+  %p.list-group-item
+    %span
+      カクテル名
+    %br
+    %span.text-muted.small
+      = "スタイル　技法　アルコール"
+  %hr
+  - @can_recipes.each do |r|
+    %p.list-group-item
+      %span
+        = r[:name]
+      %br
+      %span.text-muted.small
+        = "#{r[:style]}　#{r[:tech]}　#{r[:alcohol]}"
