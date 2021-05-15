@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'material/detail/:id', to: 'material#detail'
   get 'recipe/list', to: 'recipe#list'
   get 'recipe/detail/:id', to: 'recipe#detail'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
