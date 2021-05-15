@@ -1,0 +1,10 @@
+%h1 カクテルリスト
+%hr/ 
+%table 
+  %tr 
+    %th id
+    %th name
+  -@can_recipes.each do |r|
+    %tr 
+      = content_tag :td, r.id
+      = content_tag :td, r.name
