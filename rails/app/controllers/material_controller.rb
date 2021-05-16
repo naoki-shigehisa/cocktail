@@ -16,18 +16,8 @@ class MaterialController < ApplicationController
                   r.recipe_id
                 }
     @recipes = Recipe
-                .select(:id,:name,:style_id,:tech_id,:alcohol_id)
-                .preload(:style,:tech,:alcohol)
                 .where(id: recipe_ids)
-                .map{|r|
-                  {
-                    "id": r.id,
-                    "name": r.name,
-                    "style": r.style.name,
-                    "tech": r.tech.name,
-                    "alcohol": r.alcohol.name
-                  }
-                }
+                .can_recipes
   end
 
   def all
