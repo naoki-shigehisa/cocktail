@@ -1,23 +1,21 @@
-%html
-  %body
-    .m-3
-      %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
-        %h3 カクテルリスト
-        %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/recipe/list'"}
-          トップへ
-      
-      %ul.list-group.mb-3
-        %p.list-group-item
-          %span.text-dark.font-weight-bold
-            カクテル名
-          %br
-          %span.text-muted.small
-            = "スタイル　技法　アルコール"
-      %ul.list-group  
-        - @recipes.each do |r|
-          %a.list-group-item{href: "/recipe/detail/#{r[:id]}"}
-            %span.text-dark.font-weight-bold
-              = r[:name]
-            %br
-            %span.text-muted.small
-              = "#{r[:style]}　#{r[:tech]}　#{r[:alcohol]}"
+.m-3
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
+    %h3 カクテルリスト
+    %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/recipe/list'"}
+      トップへ
+  
+  %ul.list-group.mb-3
+    %p.list-group-item
+      %span.text-dark.font-weight-bold
+        カクテル名
+      %br
+      %span.text-muted.small
+        = "スタイル　技法　アルコール"
+  %ul.list-group  
+    - @recipes.each do |r|
+      %a.list-group-item{href: "/recipe/detail/#{r[:id]}"}
+        %span.text-dark.font-weight-bold
+          = r[:name]
+        %br
+        %span.text-muted.small
+          = "#{r[:style]}　#{r[:tech]}　#{r[:alcohol]}"

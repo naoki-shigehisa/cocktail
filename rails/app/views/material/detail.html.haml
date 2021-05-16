@@ -1,38 +1,36 @@
-%html
-  %body
-    .m-3
-      %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
-        %h3
-          = @material_detail.name
-        %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/recipe/list'"}
-          トップへ
+.m-3
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
+    %h3
+      = @material_detail.name
+    %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/recipe/list'"}
+      トップへ
 
-      %table.table.m-0
-        %tr
-          %th 在庫
-          %th
-            - if @material_detail.have_flag
-              あり
-            - else
-              なし
-        %tr
-          %th カテゴリー
-          %th
-            - if @material_detail.alcohol_flag
-              %i.fa.fa-wine-glass-alt.text-dark
-              アルコール
-            - else
-              ノンアルコール
-      %hr.mt-0
+  %table.table.m-0
+    %tr
+      %th 在庫
+      %th
+        - if @material_detail.have_flag
+          あり
+        - else
+          なし
+    %tr
+      %th カテゴリー
+      %th
+        - if @material_detail.alcohol_flag
+          %i.fa.fa-wine-glass-alt.text-dark
+          アルコール
+        - else
+          ノンアルコール
+  %hr.mt-0
 
-      %p.font-weight-bold.mb-1 使うレシピ
-      %hr.mt-0
+  %p.font-weight-bold.mb-1 使うレシピ
+  %hr.mt-0
 
-      %ul.list-group
-        - @recipes.each do |r|
-          %a.list-group-item{href: "/recipe/detail/#{r[:id]}"}
-            %span.text-dark.font-weight-bold
-              = r[:name]
-            %br
-            %span.text-muted.small
-              = "#{r[:style]}　#{r[:tech]}　#{r[:alcohol]}"
+  %ul.list-group
+    - @recipes.each do |r|
+      %a.list-group-item{href: "/recipe/detail/#{r[:id]}"}
+        %span.text-dark.font-weight-bold
+          = r[:name]
+        %br
+        %span.text-muted.small
+          = "#{r[:style]}　#{r[:tech]}　#{r[:alcohol]}"

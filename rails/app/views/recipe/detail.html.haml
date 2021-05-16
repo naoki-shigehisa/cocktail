@@ -1,57 +1,55 @@
-%html
-  %body
-    .m-3
-      %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
-        %h3
-          = @recipe_detail.name
-        %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/recipe/list'"}
-          トップへ
+.m-3
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
+    %h3
+      = @recipe_detail.name
+    %button.btn.btn-outline-dark.btn-sm{onclick: "location.href='/recipe/list'"}
+      トップへ
 
-      %table.table.m-0
-        %tr
-          %th スタイル
-          %th
-            = @recipe_detail.style.name
-        %tr
-          %th 技法
-          %th
-            = @recipe_detail.tech.name
-        %tr
-          %th アルコール
-          %th
-            = @recipe_detail.alcohol.name
-      %hr.mt-0
+  %table.table.m-0
+    %tr
+      %th スタイル
+      %th
+        = @recipe_detail.style.name
+    %tr
+      %th 技法
+      %th
+        = @recipe_detail.tech.name
+    %tr
+      %th アルコール
+      %th
+        = @recipe_detail.alcohol.name
+  %hr.mt-0
 
-      %p.font-weight-bold.mb-1 材料
-      %hr.mt-0
-      - @materials.each do |m|
-        %a.list-group-item{href: "/material/detail/#{m[:id]}"}
-          .container.m-0.p-0
-            - if m[:have_flag]
-              .row.m-0.p-0
-                .col.text-left.m-0.p-0
-                  - if m[:alcohol_flag]
-                    %i.fa.fa-wine-glass-alt.text-dark
-                  %span.text-dark.font-weight-bold
-                    = m[:name]
-              .row.m-0.p-0
-                .col.text-left.m-0.p-0
-                  %span.text-dark
-                    = m[:amount]
-                - if m[:option_flag]
-                  .col.text-right.m-0.p-0
-                    %span.text-muted オプション
-            - else
-              .row.m-0.p-0
-                .col.text-left.m-0.p-0
-                  - if m[:alcohol_flag]
-                    %i.fa.fa-wine-glass-alt.text-muted
-                  %span.text-muted
-                    = m[:name]
-              .row.m-0.p-0
-                .col.text-left.m-0.p-0
-                  %span.text-muted
-                    = m[:amount]
-                - if m[:option_flag]
-                  .col.text-right.m-0.p-0
-                    %span.text-muted オプション
+  %p.font-weight-bold.mb-1 材料
+  %hr.mt-0
+  - @materials.each do |m|
+    %a.list-group-item{href: "/material/detail/#{m[:id]}"}
+      .container.m-0.p-0
+        - if m[:have_flag]
+          .row.m-0.p-0
+            .col.text-left.m-0.p-0
+              - if m[:alcohol_flag]
+                %i.fa.fa-wine-glass-alt.text-dark
+              %span.text-dark.font-weight-bold
+                = m[:name]
+          .row.m-0.p-0
+            .col.text-left.m-0.p-0
+              %span.text-dark
+                = m[:amount]
+            - if m[:option_flag]
+              .col.text-right.m-0.p-0
+                %span.text-muted オプション
+        - else
+          .row.m-0.p-0
+            .col.text-left.m-0.p-0
+              - if m[:alcohol_flag]
+                %i.fa.fa-wine-glass-alt.text-muted
+              %span.text-muted
+                = m[:name]
+          .row.m-0.p-0
+            .col.text-left.m-0.p-0
+              %span.text-muted
+                = m[:amount]
+            - if m[:option_flag]
+              .col.text-right.m-0.p-0
+                %span.text-muted オプション
