@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   # Welcome
   root to: 'application#welcome'
-  
-  get 'come_to_shigehisa', to: 'application#come_to_shigehisa'
+
+  get 'do_not_come_to_shigehisa', to: 'application#do_not_come_to_shigehisa'
 
   get 'material/list', to: 'material#list'
   get 'material/detail/:id', to: 'material#detail'

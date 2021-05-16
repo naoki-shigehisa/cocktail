@@ -3,15 +3,15 @@ class ApplicationController < ActionController::Base
         render 'layouts/welcome'
     end
 
-    def come_to_shigehisa
+    def do_not_come_to_shigehisa
         word_num = rand(3)
         if word_num == 0
-            @word = "「呼んだ？」"
+            @word = "むり"
         elsif word_num == 1
-            @word = "「やだ」"
+            @word = "やだ"
         else
-            @word = "「二度と呼ぶな」"
+            @word = "二度と呼ぶな"
         end
-        render 'layouts/come_to_shigehisa'
+        render 'layouts/do_not_come_to_shigehisa'
     end
 end
