@@ -4,14 +4,20 @@ class RecipeController < ApplicationController
   end
 
   def detail
+    if params[:id] == "-1"
+      id = Recipe.can_recipes.sample[:id]
+    else
+      id = params[:id]
+    end
+
     @recipe_detail = Recipe
                       .select(:id,:name,:style_id,:tech_id,:alcohol_id)
                       .joins(:style,:tech,:alcohol)
-                      .find(params[:id])
+                      .find(id)
     @materials = RecipeMaterial
                   .select(:recipe_id,:material_id,:amount,:option_flag)
                   .preload(:material)
-                  .where("recipe_id = ?", params[:id])
+                  .where("recipe_id = ?", id)
                   .map{|m|
                     {
                       "id": m.material.id,
