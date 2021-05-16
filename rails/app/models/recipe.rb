@@ -18,16 +18,22 @@ class Recipe < ApplicationRecord
                         "alcohol": r.alcohol.name
                       }
                     }
+        
+        recipe_ids = recipes.map{|r| r[:id]}
+        have_flags = RecipeMaterial
+                      .select(:id,:recipe_id,:material_id,:option_flag)
+                      .includes(:material)
+                      .where(recipe_id: recipe_ids, option_flag: 0)
+                      .map{|r|
+                        {
+                          "recipe_id": r.recipe_id,
+                          "have_flag": r.material.have_flag
+                        }
+                      }
+
         @can_recipes = []
         recipes.each{|recipe|
-          have_flag = RecipeMaterial
-            .select(:id,:recipe_id,:material_id,:option_flag)
-            .includes(:material)
-            .where("(recipe_id = ?) AND (option_flag = 0)", recipe[:id])
-            .map{|r|
-              r.material.have_flag
-            }
-            .all? {|v| v }
+          have_flag = have_flags.select {|h| h[:recipe_id] == recipe[:id]}.all? {|h| h[:have_flag] }
           if have_flag
             @can_recipes << recipe
           end
