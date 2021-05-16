@@ -4,6 +4,29 @@ class Recipe < ApplicationRecord
     belongs_to :style
     belongs_to :alcohol
 
+    def self.detail(recipe_id)
+      return self
+              .select(:id,:name,:style_id,:tech_id,:alcohol_id)
+              .joins(:style,:tech,:alcohol)
+              .find(recipe_id)
+    end
+
+    def self.all_recipes
+      return self
+              .all
+              .order(:name)
+              .preload(:style,:tech,:alcohol)
+              .map{|r|
+                {
+                  "id": r.id,
+                  "name": r.name,
+                  "style": r.style.name,
+                  "tech": r.tech.name,
+                  "alcohol": r.alcohol.name
+                }
+              }
+    end
+
     def self.can_recipes
         recipes = self
                     .select(:id,:name,:style_id,:tech_id,:alcohol_id)
