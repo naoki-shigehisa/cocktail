@@ -4,17 +4,18 @@ class ApplicationController < ActionController::Base
     end
 
     def do_not_come_to_shigehisa
-        word_num = rand(3)
-        if word_num == 0
-            @word = "むり"
-            @apologize = "ごめんて..."
-        elsif word_num == 1
-            @word = "やだ"
-            @apologize = "そんな..."
-        else
-            @word = "二度と呼ぶな"
-            @apologize = "うそでしょ..."
-        end
+        word_list = [
+          "むり",
+          "やだ",
+          "二度と呼ぶな"
+        ]
+        apologize_list = [
+          "ごめんて...",
+          "そんな...",
+          "うそでしょ..."
+        ]
+        @word = word_list[rand(word_list.length)]
+        @apologize = apologize_list[rand(apologize_list.length)]
         render 'layouts/do_not_come_to_shigehisa'
     end
 end
