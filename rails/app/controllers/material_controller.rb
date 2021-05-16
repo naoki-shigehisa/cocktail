@@ -3,6 +3,7 @@ class MaterialController < ApplicationController
     @materials = Material
                   .select(:id,:name,:alcohol_flag,:have_flag)
                   .where("have_flag = ?", 1)
+                  .order(:name)
   end
 
   def detail
@@ -21,6 +22,6 @@ class MaterialController < ApplicationController
   end
 
   def all
-    @materials = Material.all
+    @materials = Material.all.order(:name)
   end
 end

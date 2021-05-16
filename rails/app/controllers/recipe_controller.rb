@@ -27,6 +27,7 @@ class RecipeController < ApplicationController
   def all
     @recipes = Recipe
                 .all
+                .order(:name)
                 .preload(:style,:tech,:alcohol)
                 .map{|r|
                   {

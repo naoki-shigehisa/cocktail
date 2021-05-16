@@ -7,6 +7,7 @@ class Recipe < ApplicationRecord
     def self.can_recipes
         recipes = self
                     .select(:id,:name,:style_id,:tech_id,:alcohol_id)
+                    .order(:name)
                     .preload(:style,:tech,:alcohol)
                     .map{|r|
                       {
