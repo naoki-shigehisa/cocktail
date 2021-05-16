@@ -22,7 +22,7 @@ class Recipe < ApplicationRecord
         recipe_ids = recipes.map{|r| r[:id]}
         have_flags = RecipeMaterial
                       .select(:id,:recipe_id,:material_id,:option_flag)
-                      .includes(:material)
+                      .preload(:material)
                       .where(recipe_id: recipe_ids, option_flag: 0)
                       .map{|r|
                         {
