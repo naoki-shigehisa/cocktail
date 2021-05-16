@@ -39,4 +39,8 @@ class RecipeController < ApplicationController
                   }
                 }
   end
+
+  def list_only_name
+    @recipes = Recipe.can_recipes
+  end
 end
