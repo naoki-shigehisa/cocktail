@@ -14,7 +14,7 @@
           %span.text-muted.small
             = "スタイル　技法　アルコール"
       %ul.list-group  
-        - @can_recipes.each do |r|
+        - @recipes.each do |r|
           %a.list-group-item{href: "/recipe/detail/#{r[:id]}"}
             %span.text-dark.font-weight-bold
               = r[:name]
