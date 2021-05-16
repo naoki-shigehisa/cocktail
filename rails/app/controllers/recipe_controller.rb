@@ -48,4 +48,19 @@ class RecipeController < ApplicationController
                     }
                   }
   end
+
+  def all
+    @recipes = Recipe
+                .all
+                .preload(:style,:tech,:alcohol)
+                .map{|r|
+                  {
+                    "id": r.id,
+                    "name": r.name,
+                    "style": r.style.name,
+                    "tech": r.tech.name,
+                    "alcohol": r.alcohol.name
+                  }
+                }
+  end
 end

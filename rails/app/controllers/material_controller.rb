@@ -29,4 +29,8 @@ class MaterialController < ApplicationController
                   }
                 }
   end
+
+  def all
+    @materials = Material.all
+  end
 end
