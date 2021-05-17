@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2021_05_14_054300) do
 
-  create_table "alcohols", force: :cascade do |t|
+  create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "materials", force: :cascade do |t|
+  create_table "materials", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.boolean "alcohol_flag"
     t.boolean "have_flag"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_054300) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "recipe_materials", force: :cascade do |t|
+  create_table "recipe_materials", charset: "utf8mb4", force: :cascade do |t|
     t.integer "recipe_id"
     t.integer "material_id"
     t.string "amount"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_054300) do
     t.boolean "option_flag"
   end
 
-  create_table "recipes", force: :cascade do |t|
+  create_table "recipes", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.integer "style_id"
     t.integer "tech_id"
@@ -44,13 +44,13 @@ ActiveRecord::Schema.define(version: 2021_05_14_054300) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "styles", force: :cascade do |t|
+  create_table "styles", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "teches", force: :cascade do |t|
+  create_table "teches", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
