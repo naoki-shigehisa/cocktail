@@ -1,7 +1,4 @@
-.m-3
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
-    %h3 材料リスト
-  
+.m-3  
   %ul.list-group
     - @materials.each do |m|
       %a.list-group-item{href: "/material/detail/#{m.id}"}
