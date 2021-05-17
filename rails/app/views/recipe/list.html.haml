@@ -50,13 +50,21 @@
       %span.text-dark.font-weight-bold
         カクテル名
       %br
-      %span.text-muted.small
-        = "スタイル　技法　アルコール"
+      %span.badge.badge-pill.badge-light.text-secondary
+        スタイル
+      %span.badge.badge-pill.badge-light.text-secondary
+        技法
+      %span.badge.badge-pill.badge-light.text-secondary
+        アルコール
   %ul.list-group  
     - @recipes.each do |r|
       %a.list-group-item{href: "/recipe/detail/#{r[:id]}"}
         %span.text-dark.font-weight-bold
           = r[:name]
         %br
-        %span.text-muted.small
-          = "#{r[:style]}　#{r[:tech]}　#{r[:alcohol]}"
+        %span.badge.badge-pill.badge-light.text-secondary
+          = r[:style]
+        %span.badge.badge-pill.badge-light.text-secondary
+          = r[:tech]
+        %span.badge.badge-pill.badge-light.text-secondary
+          = r[:alcohol]
