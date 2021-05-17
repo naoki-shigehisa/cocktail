@@ -5,14 +5,14 @@
         - if params[:style] == '0'
           %a.nav-link.text-white.bg-secondary.active.p-1 全て
         - else
-          %a.nav-link.text-dark.p-1{href: "/recipe/list?style=0&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}"} 全て
+          %a.nav-link.text-dark.p-1{href: "/recipe/list?style=0&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&choice_materials=#{params[:choice_materials]}"} 全て
       - @styles.each do |style|
         %li.nav-item{style: "font-size: 0.8rem"}
           - if params[:style] == style.id.to_s
             %a.nav-link.text-white.bg-secondary.active.p-1
               = style.name
           - else
-            %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{style.id}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}"}
+            %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{style.id}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&choice_materials=#{params[:choice_materials]}"}
               = style.name
     
     %ul.nav.nav-pills.nav-fill.my-1
@@ -20,14 +20,14 @@
         - if params[:tech] == '0'
           %a.nav-link.text-white.bg-secondary.active.p-1 全て
         - else
-          %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=0&alcohol=#{params[:alcohol]}"} 全て
+          %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=0&alcohol=#{params[:alcohol]}&choice_materials=#{params[:choice_materials]}"} 全て
       - @techs.each do |tech|
         %li.nav-item{style: "font-size: 0.8rem"}
           - if params[:tech] == tech.id.to_s
             %a.nav-link.text-white.bg-secondary.active.p-1
               = tech.name
           - else
-            %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{tech.id}&alcohol=#{params[:alcohol]}"}
+            %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{tech.id}&alcohol=#{params[:alcohol]}&choice_materials=#{params[:choice_materials]}"}
               = tech.name
 
     %ul.nav.nav-pills.nav-fill.my-1
@@ -35,15 +35,26 @@
         - if params[:alcohol] == '0'
           %a.nav-link.text-white.bg-secondary.active.p-1 全て
         - else
-          %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0"} 全て
+          %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&choice_materials=#{params[:choice_materials]}"} 全て
       - @alcohols.each do |alcohol|
         %li.nav-item{style: "font-size: 0.8rem"}
           - if params[:alcohol] == alcohol.id.to_s
             %a.nav-link.text-white.bg-secondary.active.p-1
               = alcohol.name
           - else
-            %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{alcohol.id}"}
+            %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{alcohol.id}&choice_materials=#{params[:choice_materials]}"}
               = alcohol.name
+
+    %button.btn.btn-secondary.btn-sm.btn-block.my-3{"type": "button", "data-toggle": "collapse", "data-target": "#materials"} 
+      <i class="fas fa-chevron-circle-down"></i>　Materials　<i class="fas fa-chevron-circle-down"></i>
+    .collapse#materials{style: "font-size: 1.2rem"}
+      - @materials.each do |material|
+        - if params[:choice_materials].find { |id| id == material.id }
+          %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=#{material.id}&choice_materials=#{params[:choice_materials]}"}
+            = material.name
+        - else
+          %a.badge.badge-pill.badge-light.text-secondary{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=#{material.id}&choice_materials=#{params[:choice_materials]}"}
+            = material.name
   
   %ul.list-group.my-3
     %p.list-group-item
