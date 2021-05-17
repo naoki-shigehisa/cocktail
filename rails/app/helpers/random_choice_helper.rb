@@ -1,0 +1,2 @@
+module RandomChoiceHelper
+end

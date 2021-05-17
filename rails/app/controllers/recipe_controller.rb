@@ -28,14 +28,8 @@ class RecipeController < ApplicationController
   end
 
   def detail
-    if params[:id] == "-1"
-      id = Recipe.can_recipes.sample[:id]
-    else
-      id = params[:id]
-    end
-
-    @recipe_detail = Recipe.detail(id)
-    @materials = RecipeMaterial.recipe_materials(id)
+    @recipe_detail = Recipe.detail(params[:id])
+    @materials = RecipeMaterial.recipe_materials(params[:id])
   end
 
   def all

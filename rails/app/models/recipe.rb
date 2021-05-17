@@ -63,4 +63,19 @@ class Recipe < ApplicationRecord
         }
         @can_recipes
     end
+
+    def self.recipes_by_terms(style_id, tech_id, alcohol_id)
+      @recipes = Recipe
+      if style_id and style_id != "0"
+        @recipes = @recipes.where("style_id = ?", style_id)
+      end
+      if tech_id and tech_id != "0"
+        @recipes = @recipes.where("tech_id = ?", tech_id)
+      end
+      if alcohol_id and alcohol_id != "0"
+        @recipes = @recipes.where("alcohol_id = ?", alcohol_id)
+      end
+
+      @recipes
+    end
 end

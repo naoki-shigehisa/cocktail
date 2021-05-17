@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   get 'recipe/all', to: 'recipe#all'
   get 'recipe/list_only_name', to: 'recipe#list_only_name'
 
+  # random_choice
+  get 'random_choice/terms', to: 'random_choice#terms'
+  get 'random_choice/order', to: 'random_choice#order'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

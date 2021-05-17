@@ -1,0 +1,55 @@
+.m-3
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
+    %h3 お任せカクテル
+  
+  .my-2
+    %ul.nav.nav-pills.nav-fill.my-1
+      %li.nav-item{style: "font-size: 0.8rem"}
+        - if params[:style] == '0'
+          %a.nav-link.text-white.bg-secondary.active.p-1 全て
+        - else
+          %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=0&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}"} 全て
+      - @styles.each do |style|
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if params[:style] == style.id.to_s
+            %a.nav-link.text-white.bg-secondary.active.p-1
+              = style.name
+          - else
+            %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{style.id}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}"}
+              = style.name
+    
+    %ul.nav.nav-pills.nav-fill.my-1
+      %li.nav-item{style: "font-size: 0.8rem"}
+        - if params[:tech] == '0'
+          %a.nav-link.text-white.bg-secondary.active.p-1 全て
+        - else
+          %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{params[:style]}&tech=0&alcohol=#{params[:alcohol]}"} 全て
+      - @techs.each do |tech|
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if params[:tech] == tech.id.to_s
+            %a.nav-link.text-white.bg-secondary.active.p-1
+              = tech.name
+          - else
+            %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{params[:style]}&tech=#{tech.id}&alcohol=#{params[:alcohol]}"}
+              = tech.name
+
+    %ul.nav.nav-pills.nav-fill.my-1
+      %li.nav-item{style: "font-size: 0.8rem"}
+        - if params[:alcohol] == '0'
+          %a.nav-link.text-white.bg-secondary.active.p-1 全て
+        - else
+          %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0"} 全て
+      - @alcohols.each do |alcohol|
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if params[:alcohol] == alcohol.id.to_s
+            %a.nav-link.text-white.bg-secondary.active.p-1
+              = alcohol.name
+          - else
+            %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{alcohol.id}"}
+              = alcohol.name
+
+  %a.btn.btn-secondary.btn-block.my-3{href: "/random_choice/order?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}", role: "button"}>
+    <i class="fas fa-cocktail"></i> 注文する
+
+  - if params[:message]
+    .text-center.small ※この条件で作れるカクテルがありません
