@@ -45,7 +45,7 @@
             %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{alcohol.id}"}
               = alcohol.name
 
-  %a.btn.btn-secondary.btn-block.my-3{href: "/random_choice/order?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}", role: "button"}>
+  %a.btn.btn-secondary.btn-block.my-3{href: "/random_choice/order?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}", role: "button"}
     <i class="fas fa-cocktail"></i> 注文する
 
   - if params[:message]
