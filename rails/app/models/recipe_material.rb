@@ -2,6 +2,7 @@ class RecipeMaterial < ApplicationRecord
     belongs_to :recipe
     belongs_to :material
 
+    # 特定のレシピの材料の情報を取得
     def self.recipe_materials(recipe_id)
         return self
                 .select(:recipe_id,:material_id,:amount,:option_flag)
@@ -19,6 +20,7 @@ class RecipeMaterial < ApplicationRecord
                 }
     end
 
+    # 特定の材料を使うレシピリストを取得
     def self.recipe_ids_by_material(material_id)
         return self
                 .select(:recipe_id,:material_id)

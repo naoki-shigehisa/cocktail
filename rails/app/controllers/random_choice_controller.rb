@@ -1,4 +1,5 @@
 class RandomChoiceController < ApplicationController
+  # ランダムチョイスの条件選択画面
   def terms
     @styles = Style.all
     @techs = Tech.all
@@ -10,6 +11,7 @@ class RandomChoiceController < ApplicationController
     end
   end
 
+  # ランダムチョイス
   def order
     @recipes = Recipe.recipes_by_terms(params[:style], params[:tech], params[:alcohol]).can_recipes
 

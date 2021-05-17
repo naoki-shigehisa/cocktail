@@ -1,4 +1,5 @@
 class RecipeController < ApplicationController
+  # 作れるレシピリスト
   def list
     @recipes = Recipe
 
@@ -27,15 +28,18 @@ class RecipeController < ApplicationController
     @alcohols = Alcohol.all
   end
 
+  # レシピの詳細情報
   def detail
     @recipe_detail = Recipe.detail(params[:id])
     @materials = RecipeMaterial.recipe_materials(params[:id])
   end
 
+  # 全てのレシピ
   def all
     @recipes = Recipe.all_recipes
   end
 
+  # 作れるレシピのリスト(レシピ名だけを表示)
   def list_only_name
     @recipes = Recipe.can_recipes
   end

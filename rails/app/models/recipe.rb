@@ -4,6 +4,7 @@ class Recipe < ApplicationRecord
     belongs_to :style
     belongs_to :alcohol
 
+    # 特定のレシピの情報を取得
     def self.detail(recipe_id)
       return self
               .select(:id,:name,:style_id,:tech_id,:alcohol_id)
@@ -11,6 +12,7 @@ class Recipe < ApplicationRecord
               .find(recipe_id)
     end
 
+    # 全てのレシピ情報を取得
     def self.all_recipes
       return self
               .all
@@ -27,6 +29,7 @@ class Recipe < ApplicationRecord
               }
     end
 
+    # 今ある材料で作れるレシピを取得
     def self.can_recipes
         recipes = self
                     .select(:id,:name,:style_id,:tech_id,:alcohol_id)
@@ -64,6 +67,7 @@ class Recipe < ApplicationRecord
         @can_recipes
     end
 
+    # レシピを条件で絞り込む
     def self.recipes_by_terms(style_id, tech_id, alcohol_id)
       @recipes = Recipe
       if style_id and style_id != "0"
