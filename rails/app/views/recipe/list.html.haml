@@ -47,8 +47,21 @@
     
     %button.btn.btn-secondary.btn-sm.btn-block.my-3{"type": "button", "data-toggle": "collapse", "data-target": "#materials"} 
       <i class="fas fa-chevron-circle-down"></i>　Materials　<i class="fas fa-chevron-circle-down"></i>
+    
     - if @open_materials
       .collapse.show#materials{style: "font-size: 1.2rem"}
+        %ul.nav.nav-pills.nav-justified.my-1
+          %li.nav-item{style: "font-size: 0.8rem"}
+            - if params[:material_mode] == '0'
+              %a.nav-link.text-white.bg-secondary.active.p-1 この材料でできる
+            - else
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=0&choice_materials=#{@choice_materials.join(',')}"} この材料でできる
+          %li.nav-item{style: "font-size: 0.8rem"}
+            - if params[:material_mode] == '1'
+              %a.nav-link.text-white.bg-secondary.active.p-1 この材料を含む
+            - else
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=1&choice_materials=#{@choice_materials.join(',')}"} この材料を含む
+        
         %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=99999&choice_materials=#{@choice_materials.join(',')}"}
           全て選択
         - @materials.each do |material|
@@ -60,8 +73,21 @@
               = material.name
         %a.badge.badge-pill.badge-light.text-secondary{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=-1&choice_materials=#{@choice_materials.join(',')}"}
           全て解除
+
     - else
       .collapse#materials{style: "font-size: 1.2rem"}
+        %ul.nav.nav-pills.nav-justified.my-1
+          %li.nav-item{style: "font-size: 0.8rem"}
+            - if params[:material_mode] == '0'
+              %a.nav-link.text-white.bg-secondary.active.p-1 この材料でできる
+            - else
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=0&choice_materials=#{@choice_materials.join(',')}"} この材料でできる
+          %li.nav-item{style: "font-size: 0.8rem"}
+            - if params[:material_mode] == '1'
+              %a.nav-link.text-white.bg-secondary.active.p-1 この材料を含む
+            - else
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=1&choice_materials=#{@choice_materials.join(',')}"} この材料を含む
+
         %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=99999&choice_materials=#{@choice_materials.join(',')}"}
           全て選択
         - @materials.each do |material|

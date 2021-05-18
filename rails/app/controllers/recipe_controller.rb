@@ -47,7 +47,12 @@ class RecipeController < ApplicationController
                               }
     end
 
-    @recipes = @recipes.can_recipes_by_term(@choice_materials)
+    if params[:material_mode]
+      @open_materials = true
+    else
+      params[:material_mode] = "0"
+    end
+    @recipes = @recipes.can_recipes_by_term(@choice_materials, params[:material_mode].to_i)
 
     @styles = Style.all
     @techs = Tech.all
