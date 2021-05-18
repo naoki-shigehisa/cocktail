@@ -67,6 +67,45 @@ class Recipe < ApplicationRecord
         @can_recipes
     end
 
+    # 指定した材料で作れるレシピを取得
+    def self.can_recipes_by_term(material_ids)
+      recipes = self
+                  .select(:id,:name,:style_id,:tech_id,:alcohol_id)
+                  .order(:name)
+                  .preload(:style,:tech,:alcohol)
+                  .map{|r|
+                    {
+                      "id": r.id,
+                      "name": r.name,
+                      "style": r.style.name,
+                      "tech": r.tech.name,
+                      "alcohol": r.alcohol.name
+                    }
+                  }
+      
+      recipe_ids = recipes.map{|r| r[:id]}
+      materials = RecipeMaterial
+                    .select(:id,:recipe_id,:material_id,:option_flag)
+                    .where(recipe_id: recipe_ids, option_flag: 0)
+                    .map{|r|
+                      {
+                        "recipe_id": r.recipe_id,
+                        "material_id": r.material_id
+                      }
+                    }
+
+      @can_recipes = []
+      recipes.each{|recipe|
+        can_flag = materials
+                    .select {|m| m[:recipe_id] == recipe[:id]}
+                    .all? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
+        if can_flag
+          @can_recipes << recipe
+        end
+      }
+      @can_recipes
+  end
+
     # レシピを条件で絞り込む
     def self.recipes_by_terms(style_id, tech_id, alcohol_id)
       @recipes = Recipe

@@ -17,23 +17,29 @@ class RecipeController < ApplicationController
     else
       params[:alcohol] = "0"
     end
-    @recipes = @recipes.can_recipes
 
-    if request.referer&.include?("/recipe/list")
+    if params[:choice_materials]
+      @choice_materials = params[:choice_materials].split(',')
       if params[:material]
-        if params[:choice_materials].find { |id| id == params[:material] }
-          params[:material].delete(params[:material])
+        @open_materials = true
+        if @choice_materials.find { |id| id == params[:material] }
+          @choice_materials.delete(params[:material])
         else
-          params[:material].push(params[:material])
+          @choice_materials.push(params[:material])
         end
+      else
+        @open_materials = false
       end
     else
-      params[:choice_materials] = Material
-                                  .have_materials
-                                  .map{|m|
-                                    m.id
-                                  }
+      @open_materials = false
+      @choice_materials = Material
+                              .have_materials
+                              .map{|m|
+                                m.id.to_s
+                              }
     end
+
+    @recipes = @recipes.can_recipes_by_term(@choice_materials)
 
     @styles = Style.all
     @techs = Tech.all
