@@ -49,6 +49,8 @@
       <i class="fas fa-chevron-circle-down"></i>　Materials　<i class="fas fa-chevron-circle-down"></i>
     - if @open_materials
       .collapse.show#materials{style: "font-size: 1.2rem"}
+        %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=99999&choice_materials=#{@choice_materials.join(',')}"}
+          全て選択
         - @materials.each do |material|
           - if @choice_materials.find { |id| id == material.id.to_s }
             %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=#{material.id}&choice_materials=#{@choice_materials.join(',')}"}
@@ -56,8 +58,12 @@
           - else
             %a.badge.badge-pill.badge-light.text-secondary{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=#{material.id}&choice_materials=#{@choice_materials.join(',')}"}
               = material.name
+        %a.badge.badge-pill.badge-light.text-secondary{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=-1&choice_materials=#{@choice_materials.join(',')}"}
+          全て解除
     - else
       .collapse#materials{style: "font-size: 1.2rem"}
+        %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=99999&choice_materials=#{@choice_materials.join(',')}"}
+          全て選択
         - @materials.each do |material|
           - if @choice_materials.find { |id| id == material.id.to_s }
             %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=#{material.id}&choice_materials=#{@choice_materials.join(',')}"}
@@ -65,6 +71,8 @@
           - else
             %a.badge.badge-pill.badge-light.text-secondary{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=#{material.id}&choice_materials=#{@choice_materials.join(',')}"}
               = material.name
+        %a.badge.badge-pill.badge-light.text-secondary{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=-1&choice_materials=#{@choice_materials.join(',')}"}
+          全て解除
   
   %ul.list-group.my-3
     %p.list-group-item

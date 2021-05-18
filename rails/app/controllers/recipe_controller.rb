@@ -22,7 +22,15 @@ class RecipeController < ApplicationController
       @choice_materials = params[:choice_materials].split(',')
       if params[:material]
         @open_materials = true
-        if @choice_materials.find { |id| id == params[:material] }
+        if params[:material] == "99999"
+          @choice_materials = Material
+                              .have_materials
+                              .map{|m|
+                                m.id.to_s
+                              }
+        elsif params[:material] == "-1"
+          @choice_materials = []
+        elsif @choice_materials.find { |id| id == params[:material] }
           @choice_materials.delete(params[:material])
         else
           @choice_materials.push(params[:material])
