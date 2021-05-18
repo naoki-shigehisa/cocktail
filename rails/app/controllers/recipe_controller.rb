@@ -21,7 +21,6 @@ class RecipeController < ApplicationController
     if params[:choice_materials]
       @choice_materials = params[:choice_materials].split(',')
       if params[:material]
-        @open_materials = true
         if params[:material] == "99999"
           @choice_materials = Material
                               .have_materials
@@ -35,11 +34,8 @@ class RecipeController < ApplicationController
         else
           @choice_materials.push(params[:material])
         end
-      else
-        @open_materials = false
       end
     else
-      @open_materials = false
       @choice_materials = Material
                               .have_materials
                               .map{|m|
