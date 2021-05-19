@@ -57,6 +57,11 @@
             %a.nav-link.text-white.bg-secondary.active.p-1 どれかを含む
           - else
             %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material_mode=1&choice_materials=#{@choice_materials.join(',')}"} どれかを含む
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if params[:material_mode] == '2'
+            %a.nav-link.text-white.bg-secondary.active.p-1 全て含む
+          - else
+            %a.nav-link.text-dark.p-1{href: "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material_mode=2&choice_materials=#{@choice_materials.join(',')}"} 全て含む
       
       %a.badge.badge-pill.badge-secondary.text-light{href: "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=99999&material_mode=#{params[:material_mode]}&choice_materials=#{@choice_materials.join(',')}"}
         全て選択

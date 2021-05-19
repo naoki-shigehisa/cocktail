@@ -67,7 +67,7 @@ class Recipe < ApplicationRecord
   end
 
   # 指定した材料で作れるレシピを取得
-  def self.can_recipes_by_term(material_ids, include_flag)
+  def self.can_recipes_by_term(material_ids, mode)
     recipes = self.can_recipes
     
     recipe_ids = recipes.map{|r| r[:id]}
@@ -83,14 +83,13 @@ class Recipe < ApplicationRecord
 
     @can_recipes = []
     recipes.each{|recipe|
-      if include_flag == 1
-        can_flag = materials
-                        .select {|m| m[:recipe_id] == recipe[:id]}
-                        .any? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
-      else 
-        can_flag = materials
-                    .select {|m| m[:recipe_id] == recipe[:id]}
-                    .all? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
+      recipe_materials = materials.select {|m| m[:recipe_id] == recipe[:id]}
+      if mode == 0
+        can_flag = recipe_materials.all? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
+      elsif mode == 1 
+        can_flag = recipe_materials.any? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
+      else
+        can_flag = material_ids.all? {|id| recipe_materials.find { |m| id.to_i == m[:material_id] } }
       end
 
       if can_flag
