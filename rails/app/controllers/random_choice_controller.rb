@@ -46,7 +46,7 @@ class RandomChoiceController < ApplicationController
     @recipes = Recipe.recipes_by_terms(params[:style], params[:tech], params[:alcohol]).can_recipes_by_term(params[:choice_materials].split(','), params[:material_mode].to_i)
 
     if @recipes.empty?
-      redirect_to "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=#{params[:material_mode]}&choice_materials=#{@choice_materials.join(',')}&message=1"
+      redirect_to "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=#{params[:material_mode]}&choice_materials=#{params[:choice_materials]}&message=1"
     else
       id = @recipes.sample[:id]
       @recipe_detail = Recipe.detail(id)
