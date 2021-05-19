@@ -69,19 +69,7 @@ class Recipe < ApplicationRecord
 
   # 指定した材料で作れるレシピを取得
   def self.can_recipes_by_term(material_ids, include_flag)
-    recipes = self
-                .select(:id,:name,:style_id,:tech_id,:alcohol_id)
-                .order(:name)
-                .preload(:style,:tech,:alcohol)
-                .map{|r|
-                  {
-                    "id": r.id,
-                    "name": r.name,
-                    "style": r.style.name,
-                    "tech": r.tech.name,
-                    "alcohol": r.alcohol.name
-                  }
-                }
+    recipes = self.can_recipes
     
     recipe_ids = recipes.map{|r| r[:id]}
     materials = RecipeMaterial
@@ -90,7 +78,7 @@ class Recipe < ApplicationRecord
                   .map{|r|
                     {
                       "recipe_id": r.recipe_id,
-                      "material_id": r.material_id
+                      "material_id": r.material_id,
                     }
                   }
 
@@ -98,8 +86,8 @@ class Recipe < ApplicationRecord
     recipes.each{|recipe|
       if include_flag == 1
         can_flag = materials
-                    .select {|m| m[:recipe_id] == recipe[:id]}
-                    .any? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
+                        .select {|m| m[:recipe_id] == recipe[:id]}
+                        .any? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
       else 
         can_flag = materials
                     .select {|m| m[:recipe_id] == recipe[:id]}

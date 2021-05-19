@@ -53,14 +53,14 @@
         %ul.nav.nav-pills.nav-justified.my-1
           %li.nav-item{style: "font-size: 0.8rem"}
             - if params[:material_mode] == '0'
-              %a.nav-link.text-white.bg-secondary.active.p-1 この材料でできる
+              %a.nav-link.text-white.bg-secondary.active.p-1 これでできる
             - else
-              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=0&choice_materials=#{@choice_materials.join(',')}&open_material=1"} この材料でできる
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material_mode=0&choice_materials=#{@choice_materials.join(',')}&open_material=1"} これでできる
           %li.nav-item{style: "font-size: 0.8rem"}
             - if params[:material_mode] == '1'
-              %a.nav-link.text-white.bg-secondary.active.p-1 この材料を含む
+              %a.nav-link.text-white.bg-secondary.active.p-1 どれかを含む
             - else
-              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=1&choice_materials=#{@choice_materials.join(',')}&open_material=1"} この材料を含む
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material_mode=1&choice_materials=#{@choice_materials.join(',')}&open_material=1"} どれかを含む
         
         %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=99999&material_mode=#{params[:material_mode]}&choice_materials=#{@choice_materials.join(',')}&open_material=1"}
           全て選択
@@ -79,14 +79,14 @@
         %ul.nav.nav-pills.nav-justified.my-1
           %li.nav-item{style: "font-size: 0.8rem"}
             - if params[:material_mode] == '0'
-              %a.nav-link.text-white.bg-secondary.active.p-1 この材料でできる
+              %a.nav-link.text-white.bg-secondary.active.p-1 これでできる
             - else
-              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=0&choice_materials=#{@choice_materials.join(',')}&open_material=1"} この材料でできる
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material_mode=0&choice_materials=#{@choice_materials.join(',')}&open_material=1"} これでできる
           %li.nav-item{style: "font-size: 0.8rem"}
             - if params[:material_mode] == '1'
-              %a.nav-link.text-white.bg-secondary.active.p-1 この材料を含む
+              %a.nav-link.text-white.bg-secondary.active.p-1 どれかを含む
             - else
-              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=1&choice_materials=#{@choice_materials.join(',')}&open_material=1"} この材料を含む
+              %a.nav-link.text-dark.p-1{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material_mode=1&choice_materials=#{@choice_materials.join(',')}&open_material=1"} どれかを含む
 
         %a.badge.badge-pill.badge-secondary.text-light{href: "/recipe/list?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=#{params[:alcohol]}&material=99999&material_mode=#{params[:material_mode]}&choice_materials=#{@choice_materials.join(',')}&open_material=1"}
           全て選択
