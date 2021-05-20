@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_054300) do
+ActiveRecord::Schema.define(version: 2021_05_20_014623) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_054300) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "option_flag"
+    t.boolean "base_flag"
   end
 
   create_table "recipes", charset: "utf8mb4", force: :cascade do |t|
