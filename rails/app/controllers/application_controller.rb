@@ -7,12 +7,14 @@ class ApplicationController < ActionController::Base
         word_list = [
           "むり",
           "やだ",
-          "二度と呼ぶな"
+          "二度と呼ぶな",
+          "自分でやれよ"
         ]
         apologize_list = [
           "ごめんて...",
           "そんな...",
-          "うそでしょ..."
+          "うそでしょ...",
+          "すいません"
         ]
         @word = word_list[rand(word_list.length)]
         @apologize = apologize_list[rand(apologize_list.length)]
