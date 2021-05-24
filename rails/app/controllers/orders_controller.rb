@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     Order.create(recipe_id: params[:id])
     recipe = Recipe.find(params[:id])
     recipe.update(order_count: recipe.order_count + 1)
-    redirect_to '/orders'
+    redirect_to '/confirm_order'
   end
 
   # 完成

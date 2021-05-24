@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Welcome
   root to: 'application#welcome'
   get 'do_not_come_to_shigehisa', to: 'application#do_not_come_to_shigehisa'
+  get 'confirm_order', to: 'application#confirm_order'
 
   # popular
   get 'popular', to: 'application#popular'

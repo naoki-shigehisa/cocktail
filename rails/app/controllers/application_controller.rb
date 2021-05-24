@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
       @third_order = Recipe.all.order(order_count: "DESC").third
       render 'layouts/popular'
     end
+
+    def confirm_order
+      render 'layouts/confirm_order'
+    end
 end
