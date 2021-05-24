@@ -18,4 +18,11 @@ class ApplicationController < ActionController::Base
         @apologize = apologize_list[rand(apologize_list.length)]
         render 'layouts/do_not_come_to_shigehisa'
     end
+
+    def popular
+      @first_order = Recipe.all.order(order_count: "DESC").first
+      @second_order = Recipe.all.order(order_count: "DESC").second
+      @third_order = Recipe.all.order(order_count: "DESC").third
+      render 'layouts/popular'
+    end
 end

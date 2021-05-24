@@ -1,0 +1,42 @@
+.m-3
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
+    %h3 人気リスト
+  
+  %ul.list-group.mb-3
+    %p.list-group-item
+      %span.text-dark.font-weight-bold
+        カクテル名
+      %br
+      %span.text-muted.small
+        = "スタイル　技法　アルコール"
+  %ul.list-group  
+    %a.list-group-item{href: "/recipe/detail/#{@first_order[:id]}"}
+      %span.text-dark.font-weight-bold
+        第1位 - 
+        = @first_order.order_count
+        回
+        %br
+        = @first_order[:name]
+      %br
+      %span.text-muted.small
+        = "#{@first_order.style.name}　#{@first_order.tech.name}　#{@first_order.alcohol.name}"
+    %a.list-group-item{href: "/recipe/detail/#{@second_order[:id]}"}
+      %span.text-dark.font-weight-bold
+        第2位 - 
+        = @second_order.order_count
+        回
+        %br
+        = @second_order[:name]
+      %br
+      %span.text-muted.small
+        = "#{@second_order.style.name}　#{@second_order.tech.name}　#{@second_order.alcohol.name}"
+    %a.list-group-item{href: "/recipe/detail/#{@third_order[:id]}"}
+      %span.text-dark.font-weight-bold
+        第3位 - 
+        = @third_order.order_count
+        回
+        %br
+        = @third_order[:name]
+      %br
+      %span.text-muted.small
+        = "#{@third_order.style.name}　#{@third_order.tech.name}　#{@third_order.alcohol.name}"

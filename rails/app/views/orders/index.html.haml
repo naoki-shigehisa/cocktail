@@ -1,0 +1,11 @@
+.m-3
+  .nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
+    %h3 注文リスト
+  - if @orders.count == 0
+    現在注文がありません
+  - else
+    %ul.list-group
+      - @orders.each do |o|
+        %a.list-group-item{href: "/order/detail/#{o.id}"}
+          %span.text-dark.font-weight-bold
+            = o.recipe.name
