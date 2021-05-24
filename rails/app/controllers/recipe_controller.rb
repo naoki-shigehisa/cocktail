@@ -14,17 +14,17 @@ class RecipeController < ApplicationController
 
     @recipes = Recipe
     if style and style != DEFAULT_MODE
-      @recipes = @recipes.where("style_id = ?", style)
+      @recipes = @recipes.narrow_style(style)
     else
       style = DEFAULT_MODE
     end
     if tech and tech != DEFAULT_MODE
-      @recipes = @recipes.where("tech_id = ?", tech)
+      @recipes = @recipes.narrow_tech(tech)
     else
       tech = DEFAULT_MODE
     end
     if alcohol and alcohol != DEFAULT_MODE
-      @recipes = @recipes.where("alcohol_id = ?", alcohol)
+      @recipes = @recipes.narrow_alcohol(alcohol)
     else
       alcohol = DEFAULT_MODE
     end
@@ -33,11 +33,7 @@ class RecipeController < ApplicationController
       @choice_materials = choice_materials.split(',')
       if material
         if material == ALL_SELECT
-          @choice_materials = Material
-                              .have_materials
-                              .map{|m|
-                                m.id.to_s
-                              }
+          @choice_materials = Material.have_material_ids_array
         elsif material == ALL_RELEASE
           @choice_materials = []
         elsif @choice_materials.find { |id| id == material }
@@ -47,11 +43,7 @@ class RecipeController < ApplicationController
         end
       end
     else
-      @choice_materials = Material
-                              .have_materials
-                              .map{|m|
-                                m.id.to_s
-                              }
+      @choice_materials = Material.have_material_ids_array
     end
 
     if not material_mode

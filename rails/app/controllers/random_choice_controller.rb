@@ -16,11 +16,7 @@ class RandomChoiceController < ApplicationController
       @choice_materials = choice_materials.split(',')
       if material
         if material == ALL_SELECT
-          @choice_materials = Material
-                              .have_materials
-                              .map{|m|
-                                m.id.to_s
-                              }
+          @choice_materials = Material.have_material_ids_array
         elsif material == ALL_RELEASE
           @choice_materials = []
         elsif @choice_materials.find { |id| id == material }
@@ -30,11 +26,7 @@ class RandomChoiceController < ApplicationController
         end
       end
     else
-      @choice_materials = Material
-                              .have_materials
-                              .map{|m|
-                                m.id.to_s
-                              }
+      @choice_materials = Material.have_material_ids_array
     end
 
     if not material_mode

@@ -15,4 +15,13 @@ class Material < ApplicationRecord
                 .where("have_flag = ?", 1)
                 .order(:name)
     end
+
+    # 持っている材料のidを配列で取得
+    def self.have_material_ids_array
+        return self
+                .have_materials
+                .map{|m|
+                    m.id.to_s
+                }
+    end
 end

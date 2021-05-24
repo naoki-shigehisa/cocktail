@@ -4,6 +4,10 @@ class Recipe < ApplicationRecord
   belongs_to :style
   belongs_to :alcohol
 
+  scope :narrow_style, -> (style) { where("style_id = ?", style) }
+  scope :narrow_tech, -> (tech) { where("tech_id = ?", tech) }
+  scope :narrow_alcohol, -> (alcohol) { where("alcohol_id = ?", alcohol) }
+
   # 特定のレシピの情報を取得
   def self.detail(recipe_id)
     return self
