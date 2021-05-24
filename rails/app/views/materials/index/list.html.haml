@@ -1,7 +1,7 @@
-.m-3  
+.m-3 
   %ul.list-group
     - @materials.each do |m|
-      %a.list-group-item{href: "/material/detail/#{m.id}"}
+      %a.list-group-item{href: "/materials/detail/#{m.id}"}
         - if m[:alcohol_flag]
           %i.fa.fa-wine-glass-alt.text-dark
         %span.text-dark.font-weight-bold

@@ -21,7 +21,7 @@
   %p.font-weight-bold.mb-1 材料
   %hr.mt-0
   - @materials.each do |m|
-    %a.list-group-item{href: "/material/detail/#{m[:id]}"}
+    %a.list-group-item{href: "/materials/detail/#{m[:id]}"}
       .container.m-0.p-0
         - if m[:have_flag]
           .row.m-0.p-0

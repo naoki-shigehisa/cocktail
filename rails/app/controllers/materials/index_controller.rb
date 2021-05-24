@@ -1,4 +1,4 @@
-class MaterialController < ApplicationController
+class Materials::IndexController < ApplicationController
   # 持っている材料のリスト
   def list
     @materials = Material.have_materials

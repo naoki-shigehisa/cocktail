@@ -1,16 +1,33 @@
-class RandomChoiceController < ApplicationController
+class Recipes::IndexController < ApplicationController
   DEFAULT_MODE = "0"
   ALL_SELECT = "99999"
   ALL_RELEASE = "-1"
 
-  # ランダムチョイスの条件選択画面
-  def terms
+  # 作れるレシピリスト
+  def list
     style = params[:style]
     tech = params[:tech]
     alcohol = params[:alcohol]
     choice_materials = params[:choice_materials]
     material = params[:material]
     material_mode = params[:material_mode]
+
+    @recipes = Recipe
+    if style and style != DEFAULT_MODE
+      @recipes = @recipes.narrow_style(style)
+    else
+      style = DEFAULT_MODE
+    end
+    if tech and tech != DEFAULT_MODE
+      @recipes = @recipes.narrow_tech(tech)
+    else
+      tech = DEFAULT_MODE
+    end
+    if alcohol and alcohol != DEFAULT_MODE
+      @recipes = @recipes.narrow_alcohol(alcohol)
+    else
+      alcohol = DEFAULT_MODE
+    end
 
     if choice_materials
       @choice_materials = choice_materials.split(',')
@@ -32,11 +49,7 @@ class RandomChoiceController < ApplicationController
     if not material_mode
       material_mode = DEFAULT_MODE
     end
-
-    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term(@choice_materials, material_mode.to_i)
-    if @recipes.empty?
-      @message = 1
-    end
+    @recipes = @recipes.can_recipes_by_term(@choice_materials, material_mode.to_i)
 
     @styles = Style.all
     @techs = Tech.all
@@ -46,25 +59,24 @@ class RandomChoiceController < ApplicationController
     @tech = tech
     @alcohol = alcohol
     @material_mode = material_mode
+    @open_material = params[:open_material]
   end
 
-  # ランダムチョイス
-  def order
-    style = params[:style]
-    tech = params[:tech]
-    alcohol = params[:alcohol]
-    choice_materials = params[:choice_materials]
-    material_mode = params[:material_mode]
+  # レシピの詳細情報
+  def detail
+    recipe_id = params[:id]
 
-    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term(choice_materials.split(','), material_mode.to_i)
+    @recipe_detail = Recipe.detail(recipe_id)
+    @materials = RecipeMaterial.recipe_materials(recipe_id)
+  end
 
-    if @recipes.empty?
-      redirect_to "/random_choice/terms?style=#{style}&tech=#{tech}&alcohol=#{alcohol}&material_mode=#{material_mode}&choice_materials=#{choice_materials}&message=1"
-    else
-      id = @recipes.sample[:id]
-      @recipe_detail = Recipe.detail(id)
-      @materials = RecipeMaterial.recipe_materials(id)
-      render 'recipe/detail'
-    end
+  # 全てのレシピ
+  def all
+    @recipes = Recipe.all_recipes
+  end
+
+  # 作れるレシピのリスト(レシピ名だけを表示)
+  def list_only_name
+    @recipes = Recipe.can_recipes
   end
 end

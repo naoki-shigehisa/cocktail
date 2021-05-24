@@ -1,0 +1,82 @@
+.m-3 
+  .my-2
+    %ul.nav.nav-pills.nav-fill.my-1
+      %li.nav-item{style: "font-size: 0.8rem"}
+        - if @style == '0'
+          %a.nav-link.text-white.bg-secondary.active.p-1 全て
+        - else
+          %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=0&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"} 全て
+      - @styles.each do |style|
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if @style == style.id.to_s
+            %a.nav-link.text-white.bg-secondary.active.p-1
+              = style.name
+          - else
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{style.id}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
+              = style.name
+    
+    %ul.nav.nav-pills.nav-fill.my-1
+      %li.nav-item{style: "font-size: 0.8rem"}
+        - if @tech == '0'
+          %a.nav-link.text-white.bg-secondary.active.p-1 全て
+        - else
+          %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=0&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"} 全て
+      - @techs.each do |tech|
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if @tech == tech.id.to_s
+            %a.nav-link.text-white.bg-secondary.active.p-1
+              = tech.name
+          - else
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{tech.id}&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
+              = tech.name
+
+    %ul.nav.nav-pills.nav-fill.my-1
+      %li.nav-item{style: "font-size: 0.8rem"}
+        - if @alcohol == '0'
+          %a.nav-link.text-white.bg-secondary.active.p-1 全て
+        - else
+          %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=0&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"} 全て
+      - @alcohols.each do |alcohol|
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if @alcohol == alcohol.id.to_s
+            %a.nav-link.text-white.bg-secondary.active.p-1
+              = alcohol.name
+          - else
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{alcohol.id}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
+              = alcohol.name
+
+    .materials.mt-3{style: "font-size: 1.2rem"}
+      %ul.nav.nav-pills.nav-justified.my-1
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if @material_mode == '0'
+            %a.nav-link.text-white.bg-secondary.active.p-1 これでできる
+          - else
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=0&choice_materials=#{@choice_materials.join(',')}"} これでできる
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if @material_mode == '1'
+            %a.nav-link.text-white.bg-secondary.active.p-1 どれかを含む
+          - else
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=1&choice_materials=#{@choice_materials.join(',')}"} どれかを含む
+        %li.nav-item{style: "font-size: 0.8rem"}
+          - if @material_mode == '2'
+            %a.nav-link.text-white.bg-secondary.active.p-1 全て含む
+          - else
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=2&choice_materials=#{@choice_materials.join(',')}"} 全て含む
+      
+      %a.badge.badge-pill.badge-secondary.text-light{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material=99999&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
+        全て選択
+      - @materials.each do |material|
+        - if @choice_materials.find { |id| id == material.id.to_s }
+          %a.badge.badge-pill.badge-secondary.text-light{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material=#{material.id}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
+            = material.name
+        - else
+          %a.badge.badge-pill.badge-light.text-secondary{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material=#{material.id}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
+            = material.name
+      %a.badge.badge-pill.badge-light.text-secondary{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material=-1&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
+        全て解除
+
+  %a.btn.btn-secondary.btn-block.my-3{href: "/recipes/random_choice/order?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}", role: "button"}
+    <i class="fas fa-cocktail"></i> 注文する
+
+  - if @message
+    .text-center.small ※この条件で作れるカクテルがありません
