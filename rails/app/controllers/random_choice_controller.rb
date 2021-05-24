@@ -1,26 +1,32 @@
 class RandomChoiceController < ApplicationController
+  DEFAULT_MODE = "0"
+  ALL_SELECT = "99999"
+  ALL_RELEASE = "-1"
+
   # ランダムチョイスの条件選択画面
   def terms
-    @styles = Style.all
-    @techs = Tech.all
-    @alcohols = Alcohol.all
-    @materials = Material.have_materials
+    style = params[:style]
+    tech = params[:tech]
+    alcohol = params[:alcohol]
+    choice_materials = params[:choice_materials]
+    material = params[:material]
+    material_mode = params[:material_mode]
 
-    if params[:choice_materials]
-      @choice_materials = params[:choice_materials].split(',')
-      if params[:material]
-        if params[:material] == "99999"
+    if choice_materials
+      @choice_materials = choice_materials.split(',')
+      if material
+        if material == ALL_SELECT
           @choice_materials = Material
                               .have_materials
                               .map{|m|
                                 m.id.to_s
                               }
-        elsif params[:material] == "-1"
+        elsif material == ALL_RELEASE
           @choice_materials = []
-        elsif @choice_materials.find { |id| id == params[:material] }
-          @choice_materials.delete(params[:material])
+        elsif @choice_materials.find { |id| id == material }
+          @choice_materials.delete(material)
         else
-          @choice_materials.push(params[:material])
+          @choice_materials.push(material)
         end
       end
     else
@@ -31,22 +37,37 @@ class RandomChoiceController < ApplicationController
                               }
     end
 
-    if not params[:material_mode]
-      params[:material_mode] = "0"
+    if not material_mode
+      material_mode = DEFAULT_MODE
     end
 
-    @recipes = Recipe.recipes_by_terms(params[:style], params[:tech], params[:alcohol]).can_recipes_by_term(@choice_materials, params[:material_mode].to_i)
+    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term(@choice_materials, material_mode.to_i)
     if @recipes.empty?
-      params[:message] = 1
+      @message = 1
     end
+
+    @styles = Style.all
+    @techs = Tech.all
+    @alcohols = Alcohol.all
+    @materials = Material.have_materials
+    @style = style
+    @tech = tech
+    @alcohol = alcohol
+    @material_mode = material_mode
   end
 
   # ランダムチョイス
   def order
-    @recipes = Recipe.recipes_by_terms(params[:style], params[:tech], params[:alcohol]).can_recipes_by_term(params[:choice_materials].split(','), params[:material_mode].to_i)
+    style = params[:style]
+    tech = params[:tech]
+    alcohol = params[:alcohol]
+    choice_materials = params[:choice_materials]
+    material_mode = params[:material_mode]
+
+    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term(choice_materials.split(','), material_mode.to_i)
 
     if @recipes.empty?
-      redirect_to "/random_choice/terms?style=#{params[:style]}&tech=#{params[:tech]}&alcohol=0&material_mode=#{params[:material_mode]}&choice_materials=#{params[:choice_materials]}&message=1"
+      redirect_to "/random_choice/terms?style=#{style}&tech=#{tech}&alcohol=#{alcohol}&material_mode=#{material_mode}&choice_materials=#{choice_materials}&message=1"
     else
       id = @recipes.sample[:id]
       @recipe_detail = Recipe.detail(id)

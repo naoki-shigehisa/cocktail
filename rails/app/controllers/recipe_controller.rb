@@ -1,38 +1,49 @@
 class RecipeController < ApplicationController
+  DEFAULT_MODE = "0"
+  ALL_SELECT = "99999"
+  ALL_RELEASE = "-1"
+
   # 作れるレシピリスト
   def list
+    style = params[:style]
+    tech = params[:tech]
+    alcohol = params[:alcohol]
+    choice_materials = params[:choice_materials]
+    material = params[:material]
+    material_mode = params[:material_mode]
+
     @recipes = Recipe
-    if params[:style] and params[:style] != "0"
-      @recipes = @recipes.where("style_id = ?", params[:style])
+    if style and style != DEFAULT_MODE
+      @recipes = @recipes.where("style_id = ?", style)
     else
-      params[:style] = "0"
+      style = DEFAULT_MODE
     end
-    if params[:tech] and params[:tech] != "0"
-      @recipes = @recipes.where("tech_id = ?", params[:tech])
+    if tech and tech != DEFAULT_MODE
+      @recipes = @recipes.where("tech_id = ?", tech)
     else
-      params[:tech] = "0"
+      tech = DEFAULT_MODE
     end
-    if params[:alcohol] and params[:alcohol] != "0"
-      @recipes = @recipes.where("alcohol_id = ?", params[:alcohol])
+    if alcohol and alcohol != DEFAULT_MODE
+      @recipes = @recipes.where("alcohol_id = ?", alcohol)
     else
-      params[:alcohol] = "0"
+      alcohol = DEFAULT_MODE
     end
 
-    if params[:choice_materials]
-      @choice_materials = params[:choice_materials].split(',')
-      if params[:material]
-        if params[:material] == "99999"
+    if choice_materials
+      @choice_materials = choice_materials.split(',')
+      if material
+        if material == ALL_SELECT
           @choice_materials = Material
                               .have_materials
                               .map{|m|
                                 m.id.to_s
                               }
-        elsif params[:material] == "-1"
+        elsif material == ALL_RELEASE
           @choice_materials = []
-        elsif @choice_materials.find { |id| id == params[:material] }
-          @choice_materials.delete(params[:material])
+        elsif @choice_materials.find { |id| id == material }
+          @choice_materials.delete(material)
         else
-          @choice_materials.push(params[:material])
+          @choice_materials.push(material)
         end
       end
     else
@@ -43,21 +54,28 @@ class RecipeController < ApplicationController
                               }
     end
 
-    if not params[:material_mode]
-      params[:material_mode] = "0"
+    if not material_mode
+      material_mode = DEFAULT_MODE
     end
-    @recipes = @recipes.can_recipes_by_term(@choice_materials, params[:material_mode].to_i)
+    @recipes = @recipes.can_recipes_by_term(@choice_materials, material_mode.to_i)
 
     @styles = Style.all
     @techs = Tech.all
     @alcohols = Alcohol.all
     @materials = Material.have_materials
+    @style = style
+    @tech = tech
+    @alcohol = alcohol
+    @material_mode = material_mode
+    @open_material = params[:open_material]
   end
 
   # レシピの詳細情報
   def detail
-    @recipe_detail = Recipe.detail(params[:id])
-    @materials = RecipeMaterial.recipe_materials(params[:id])
+    recipe_id = params[:id]
+
+    @recipe_detail = Recipe.detail(recipe_id)
+    @materials = RecipeMaterial.recipe_materials(recipe_id)
   end
 
   # 全てのレシピ

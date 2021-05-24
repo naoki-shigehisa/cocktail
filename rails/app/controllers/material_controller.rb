@@ -6,8 +6,10 @@ class MaterialController < ApplicationController
 
   # 材料の詳細情婦
   def detail
-    @material_detail = Material.detail(params[:id])
-    recipe_ids = RecipeMaterial.recipe_ids_by_material(params[:id])
+    material_id = params[:id]
+    
+    @material_detail = Material.detail(material_id)
+    recipe_ids = RecipeMaterial.recipe_ids_by_material(material_id)
     @recipes = Recipe.where(id: recipe_ids).can_recipes
   end
 
