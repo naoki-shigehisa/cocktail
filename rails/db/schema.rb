@@ -10,51 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_20_014623) do
+ActiveRecord::Schema.define(version: 2021_05_24_160738) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "materials", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.boolean "alcohol_flag"
-    t.boolean "have_flag"
+    t.string "name", null: false
+    t.boolean "alcohol_flag", default: false, null: false
+    t.boolean "have_flag", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "recipe_materials", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "material_id"
-    t.string "amount"
+    t.bigint "recipe_id", null: false
+    t.bigint "material_id", null: false
+    t.string "amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "option_flag"
-    t.boolean "base_flag"
+    t.boolean "option_flag", default: false, null: false
+    t.boolean "base_flag", default: false, null: false
+    t.index ["material_id"], name: "fk_rails_8d34a49dfe"
+    t.index ["recipe_id"], name: "fk_rails_cf55153585"
   end
 
   create_table "recipes", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.integer "style_id"
-    t.integer "tech_id"
-    t.integer "alcohol_id"
+    t.string "name", null: false
+    t.bigint "style_id", null: false
+    t.bigint "tech_id", null: false
+    t.bigint "alcohol_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["alcohol_id"], name: "fk_rails_fbd57f879a"
+    t.index ["style_id"], name: "fk_rails_9754ad668b"
+    t.index ["tech_id"], name: "fk_rails_8c8778d2c9"
   end
 
   create_table "styles", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "teches", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "recipe_materials", "materials"
+  add_foreign_key "recipe_materials", "recipes"
+  add_foreign_key "recipes", "alcohols"
+  add_foreign_key "recipes", "styles"
+  add_foreign_key "recipes", "teches"
 end
