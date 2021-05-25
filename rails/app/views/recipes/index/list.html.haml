@@ -1,13 +1,15 @@
+- choice_style = "font-size: 0.8rem"
+- material_style = "font-size: 1.2rem"
 .m-3
   .my-2
     %ul.nav.nav-pills.nav-fill.my-1
-      %li.nav-item{style: "font-size: 0.8rem"}
+      %li.nav-item{style: "#{choice_style}"}
         - if @style == '0'
           %a.nav-link.text-white.bg-secondary.active.p-1 全て
         - else
           %a.nav-link.text-dark.p-1{href: "/recipes/list?style=0&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"} 全て
       - @styles.each do |style|
-        %li.nav-item{style: "font-size: 0.8rem"}
+        %li.nav-item{style: "#{choice_style}"}
           - if @style == style.id.to_s
             %a.nav-link.text-white.bg-secondary.active.p-1
               = style.name
@@ -16,13 +18,13 @@
               = style.name
     
     %ul.nav.nav-pills.nav-fill.my-1
-      %li.nav-item{style: "font-size: 0.8rem"}
+      %li.nav-item{style: "#{choice_style}"}
         - if @tech == '0'
           %a.nav-link.text-white.bg-secondary.active.p-1 全て
         - else
           %a.nav-link.text-dark.p-1{href: "/recipes/list?style=#{@style}&tech=0&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"} 全て
       - @techs.each do |tech|
-        %li.nav-item{style: "font-size: 0.8rem"}
+        %li.nav-item{style: "#{choice_style}"}
           - if @tech == tech.id.to_s
             %a.nav-link.text-white.bg-secondary.active.p-1
               = tech.name
@@ -31,13 +33,13 @@
               = tech.name
 
     %ul.nav.nav-pills.nav-fill.my-1
-      %li.nav-item{style: "font-size: 0.8rem"}
+      %li.nav-item{style: "#{choice_style}"}
         - if @alcohol == '0'
           %a.nav-link.text-white.bg-secondary.active.p-1 全て
         - else
           %a.nav-link.text-dark.p-1{href: "/recipes/list?style=#{@style}&tech=#{@tech}&alcohol=0&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"} 全て
       - @alcohols.each do |alcohol|
-        %li.nav-item{style: "font-size: 0.8rem"}
+        %li.nav-item{style: "#{choice_style}"}
           - if @alcohol == alcohol.id.to_s
             %a.nav-link.text-white.bg-secondary.active.p-1
               = alcohol.name
@@ -49,19 +51,19 @@
       <i class="fas fa-chevron-circle-down"></i>　Materials　<i class="fas fa-chevron-circle-down"></i>
     
     - if @open_material
-      .collapse.show#materials{style: "font-size: 1.2rem"}
+      .collapse.show#materials{style: "#{material_style}"}
         %ul.nav.nav-pills.nav-justified.my-1
-          %li.nav-item{style: "font-size: 0.8rem"}
+          %li.nav-item{style: "#{choice_style}"}
             - if @material_mode == '0'
               %a.nav-link.text-white.bg-secondary.active.p-1 これでできる
             - else
               %a.nav-link.text-dark.p-1{href: "/recipes/list?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=0&choice_materials=#{@choice_materials.join(',')}&open_material=1"} これでできる
-          %li.nav-item{style: "font-size: 0.8rem"}
+          %li.nav-item{style: "#{choice_style}"}
             - if @material_mode == '1'
               %a.nav-link.text-white.bg-secondary.active.p-1 どれかを含む
             - else
               %a.nav-link.text-dark.p-1{href: "/recipes/list?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=1&choice_materials=#{@choice_materials.join(',')}&open_material=1"} どれかを含む
-          %li.nav-item{style: "font-size: 0.8rem"}
+          %li.nav-item{style: "#{choice_style}"}
             - if @material_mode == '2'
               %a.nav-link.text-white.bg-secondary.active.p-1 全て含む
             - else
@@ -80,19 +82,19 @@
           全て解除
 
     - else
-      .collapse#materials{style: "font-size: 1.2rem"}
+      .collapse#materials{style: "#{material_style}"}
         %ul.nav.nav-pills.nav-justified.my-1
-          %li.nav-item{style: "font-size: 0.8rem"}
+          %li.nav-item{style: "#{choice_style}"}
             - if @material_mode == '0'
               %a.nav-link.text-white.bg-secondary.active.p-1 これでできる
             - else
               %a.nav-link.text-dark.p-1{href: "/recipes/list?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=0&choice_materials=#{@choice_materials.join(',')}&open_material=1"} これでできる
-          %li.nav-item{style: "font-size: 0.8rem"}
+          %li.nav-item{style: "#{choice_style}"}
             - if @material_mode == '1'
               %a.nav-link.text-white.bg-secondary.active.p-1 どれかを含む
             - else
               %a.nav-link.text-dark.p-1{href: "/recipes/list?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=1&choice_materials=#{@choice_materials.join(',')}&open_material=1"} どれかを含む
-          %li.nav-item{style: "font-size: 0.8rem"}
+          %li.nav-item{style: "#{choice_style}"}
             - if @material_mode == '2'
               %a.nav-link.text-white.bg-secondary.active.p-1 全て含む
             - else
