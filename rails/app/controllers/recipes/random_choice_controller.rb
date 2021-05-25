@@ -33,7 +33,7 @@ class Recipes::RandomChoiceController < ApplicationController
       material_mode = DEFAULT_MODE
     end
 
-    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term(@choice_materials, material_mode.to_i)
+    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term_array(@choice_materials, material_mode.to_i)
     if @recipes.empty?
       @message = 1
     end
@@ -56,7 +56,7 @@ class Recipes::RandomChoiceController < ApplicationController
     choice_materials = params[:choice_materials]
     material_mode = params[:material_mode]
 
-    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term(choice_materials.split(','), material_mode.to_i)
+    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term_array(choice_materials.split(','), material_mode.to_i)
 
     if @recipes.empty?
       redirect_to "/recipes/random_choice/terms?style=#{style}&tech=#{tech}&alcohol=#{alcohol}&material_mode=#{material_mode}&choice_materials=#{choice_materials}&message=1"

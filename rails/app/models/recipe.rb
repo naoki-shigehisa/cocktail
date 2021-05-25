@@ -17,7 +17,7 @@ class Recipe < ApplicationRecord
   end
 
   # 全てのレシピ情報を取得
-  def self.all_recipes
+  def self.all_recipes_array
     return self
             .all
             .order(:name)
@@ -34,7 +34,7 @@ class Recipe < ApplicationRecord
   end
 
   # 今ある材料で作れるレシピを取得
-  def self.can_recipes
+  def self.can_recipes_array
       recipes = self
                   .select(:id,:name,:style_id,:tech_id,:alcohol_id)
                   .order(:name)
@@ -71,8 +71,8 @@ class Recipe < ApplicationRecord
   end
 
   # 指定した材料で作れるレシピを取得
-  def self.can_recipes_by_term(material_ids, mode)
-    recipes = self.can_recipes
+  def self.can_recipes_by_term_array(material_ids, mode)
+    recipes = self.can_recipes_array
     
     recipe_ids = recipes.map{|r| r[:id]}
     materials = RecipeMaterial

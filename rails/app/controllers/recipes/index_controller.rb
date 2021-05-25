@@ -49,7 +49,7 @@ class Recipes::IndexController < ApplicationController
     if not material_mode
       material_mode = DEFAULT_MODE
     end
-    @recipes = @recipes.can_recipes_by_term(@choice_materials, material_mode.to_i)
+    @recipes = @recipes.can_recipes_by_term_array(@choice_materials, material_mode.to_i)
 
     @styles = Style.all
     @techs = Tech.all
@@ -72,11 +72,11 @@ class Recipes::IndexController < ApplicationController
 
   # 全てのレシピ
   def all
-    @recipes = Recipe.all_recipes
+    @recipes = Recipe.all_recipes_array
   end
 
   # 作れるレシピのリスト(レシピ名だけを表示)
   def list_only_name
-    @recipes = Recipe.can_recipes
+    @recipes = Recipe.can_recipes_array
   end
 end
