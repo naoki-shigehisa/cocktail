@@ -67,7 +67,7 @@ class Recipes::IndexController < ApplicationController
     recipe_id = params[:id]
 
     @recipe_detail = Recipe.detail(recipe_id)
-    @materials = RecipeMaterial.recipe_materials(recipe_id)
+    @materials = RecipeMaterial.recipe_materials_array(recipe_id)
   end
 
   # 全てのレシピ

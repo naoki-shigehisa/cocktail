@@ -9,7 +9,7 @@ class Materials::IndexController < ApplicationController
     material_id = params[:id]
     
     @material_detail = Material.detail(material_id)
-    recipe_ids = RecipeMaterial.recipe_ids_by_material(material_id)
+    recipe_ids = RecipeMaterial.recipe_ids_by_material_array(material_id)
     @recipes = Recipe.where(id: recipe_ids).can_recipes
   end
 

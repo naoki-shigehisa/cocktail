@@ -63,7 +63,7 @@ class Recipes::RandomChoiceController < ApplicationController
     else
       id = @recipes.sample[:id]
       @recipe_detail = Recipe.detail(id)
-      @materials = RecipeMaterial.recipe_materials(id)
+      @materials = RecipeMaterial.recipe_materials_array(id)
       render 'recipes/index/detail'
     end
   end
