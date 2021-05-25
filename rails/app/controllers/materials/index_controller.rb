@@ -1,6 +1,6 @@
 class Materials::IndexController < ApplicationController
   # 持っている材料のリスト
-  def list
+  def menu
     @materials = Material.have_materials
   end
 

@@ -5,15 +5,15 @@ Rails.application.routes.draw do
 
   namespace "materials" do
     get '/', to: 'index#all'
-    get '/list', to: 'index#list'
+    get '/menu', to: 'index#menu'
     get '/detail/:id', to: 'index#detail'
   end
 
   namespace "recipes" do
     get '/', to: 'index#all'
-    get '/list', to: 'index#list'
+    get '/menu', to: 'index#menu'
     get '/detail/:id', to: 'index#detail'
-    get '/list_only_name', to: 'index#list_only_name'
+    get '/menu_only_name', to: 'index#menu_only_name'
 
     # random_choice
     get 'random_choice/terms', to: 'random_choice#terms'

@@ -4,7 +4,7 @@ class Recipes::IndexController < ApplicationController
   ALL_RELEASE = "-1"
 
   # 作れるレシピリスト
-  def list
+  def menu
     style = params[:style]
     tech = params[:tech]
     alcohol = params[:alcohol]
@@ -76,7 +76,7 @@ class Recipes::IndexController < ApplicationController
   end
 
   # 作れるレシピのリスト(レシピ名だけを表示)
-  def list_only_name
+  def menu_only_name
     @recipes = Recipe.can_recipes_array
   end
 end
