@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     get 'random_choice/order', to: 'random_choice#order'
   end
 
+  namespace :orders do
+    get '/', to: 'index#index'
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

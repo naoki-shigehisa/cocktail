@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_160738) do
+ActiveRecord::Schema.define(version: 2021_05_26_092732) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2021_05_24_160738) do
     t.boolean "have_flag", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.string "name_entered"
+    t.boolean "done_flag", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_orders_on_recipe_id"
   end
 
   create_table "recipe_materials", charset: "utf8mb4", force: :cascade do |t|
@@ -62,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_160738) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "orders", "recipes"
   add_foreign_key "recipe_materials", "materials"
   add_foreign_key "recipe_materials", "recipes"
   add_foreign_key "recipes", "alcohols"
