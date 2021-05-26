@@ -1,5 +1,5 @@
 class Orders::IndexController < ApplicationController
   def index
-      @orders = Orders.all
+      @recipes = Orders.order_recipes_array
   end
 end

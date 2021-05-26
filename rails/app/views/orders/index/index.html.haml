@@ -1,0 +1,9 @@
+.m-3  
+  %ul.list-group  
+    - @recipes.each do |r|
+      %a.list-group-item{href: "/recipes/detail/#{r[:id]}"}
+        %span.text-dark.font-weight-bold
+          = r[:name]
+        %br
+        %span.text-muted.small
+          = "#{r[:style]}　#{r[:tech]}　#{r[:alcohol]}"
