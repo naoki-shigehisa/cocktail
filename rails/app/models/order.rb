@@ -4,18 +4,15 @@ class Order < ApplicationRecord
   scope :not_make, -> { where("done_flag = ?", false) }
 
   def self.order_recipes_array
-    return Recipe
-            .all
-            .order(:name)
-            .where("id=?",self.not_make.map{|order| order.recipe_id})
-            .preload(:style,:tech,:alcohol)
-            .map{|r|
+    return Order
+            .not_make
+            .preload(:recipe)
+            .map{|o|
               {
-                "id": r.id,
-                "name": r.name,
-                "style": r.style.name,
-                "tech": r.tech.name,
-                "alcohol": r.alcohol.name
+                "id": o.id,
+                "name_entered": o.name_entered,
+                "recipe_id": o.recipe.id,
+                "name": o.recipe.name,
               }
             }
   end

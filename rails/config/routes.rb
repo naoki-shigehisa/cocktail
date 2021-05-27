@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   namespace :orders do
     get '/', to: 'index#index'
+    get '/create/:recipe_id', to: 'index#create'
+    get '/done/:id', to:'index#done'
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
