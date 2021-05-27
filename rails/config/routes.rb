@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     # random_choice
     get 'random_choice/terms', to: 'random_choice#terms'
     get 'random_choice/order', to: 'random_choice#order'
+    get 'random_choice/order_secret', to: 'random_choice#order_secret'
   end
 
   namespace :orders do

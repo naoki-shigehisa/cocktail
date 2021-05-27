@@ -67,4 +67,23 @@ class Recipes::RandomChoiceController < ApplicationController
       render 'recipes/index/detail'
     end
   end
+
+  # シークレットランダムチョイス
+  def order_secret
+    style = params[:style]
+    tech = params[:tech]
+    alcohol = params[:alcohol]
+    choice_materials = params[:choice_materials]
+    material_mode = params[:material_mode]
+
+    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term_array(choice_materials.split(','), material_mode.to_i)
+
+    if @recipes.empty?
+      redirect_to "/recipes/random_choice/terms?style=#{style}&tech=#{tech}&alcohol=#{alcohol}&material_mode=#{material_mode}&choice_materials=#{choice_materials}&message=1"
+    else
+      id = @recipes.sample[:id]
+      order = Order.create(recipe_id:id, name_entered: params[:name_entered])
+      render 'orders/index/create'
+    end
+  end
 end

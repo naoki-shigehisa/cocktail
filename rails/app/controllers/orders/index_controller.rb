@@ -5,7 +5,6 @@ class Orders::IndexController < ApplicationController
 
   def create
     order = Order.create(recipe_id:params[:recipe_id], name_entered: params[:name_entered])
-    @recipe = Recipe.detail(order.recipe_id)
   end
 
   def done

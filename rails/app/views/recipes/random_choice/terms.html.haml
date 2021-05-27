@@ -77,8 +77,19 @@
       %a.badge.badge-pill.badge-light.text-secondary{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material=-1&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
         全て解除
 
+  - if @message
+    .text-center.small ※この条件で作れるカクテルがありません
+
   %a.btn.btn-secondary.btn-block.my-3{href: "/recipes/random_choice/order?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}", role: "button"}
     <i class="fas fa-random"></i> ランダムチョイス
 
-  - if @message
-    .text-center.small ※この条件で作れるカクテルがありません
+  %form.input-group.my-3{:method => "get", :action => "/recipes/random_choice/order_secret"}
+    %input.form-control{:type => "text", :placeholder => "your name", :name => "name_entered", :aria-describedby => "order", :style => "border-color: #DDDDDD	; box-shadow: none;"}
+    %input{:type => "hidden", :name => "style", :value => "#{@style}"}
+    %input{:type => "hidden", :name => "tech", :value => "#{@tech}"}
+    %input{:type => "hidden", :name => "alcohol", :value => "#{@alcohol}"}
+    %input{:type => "hidden", :name => "material_mode", :value => "#{@material_mode}"}
+    %input{:type => "hidden", :name => "choice_materials", :value => "#{@choice_materials.join(',')}"}
+    .input-group-append
+      %button.btn.btn-secondary#order{:type => "submit"}
+        <i class="fas fa-user-secret"></i> シークレット
