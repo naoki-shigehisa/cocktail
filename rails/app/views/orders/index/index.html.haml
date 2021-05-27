@@ -7,7 +7,7 @@
             %span.text-dark.font-weight-bold
               = o[:name]
             %br
-            - if o[:name_entered]
+            - if o[:name_entered] != ""
               %span.badge.badge-pill.badge-light.text-secondary
                 = "#{o[:name_entered]}"
         .col-3

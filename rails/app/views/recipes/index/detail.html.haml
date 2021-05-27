@@ -52,5 +52,8 @@
               .col.text-right.m-0.p-0
                 %span.text-muted オプション
 
-  %a.btn.btn-secondary.btn-block.text-white.mt-3{href:"/orders/create/#{@recipe_detail.id}"}
-    <i class="fas fa-cocktail"></i> 注文する
+  %form.input-group.mt-3{:method => "get", :action => "/orders/create/#{@recipe_detail.id}"}
+    %input.form-control{:type => "text", :placeholder => "your name", :name => "name_entered", :aria-describedby => "order", :style => "border-color: #DDDDDD	; box-shadow: none;"}
+    .input-group-append
+      %button.btn.btn-secondary#order{:type => "submit"}
+        <i class="fas fa-cocktail"></i> 注文する
