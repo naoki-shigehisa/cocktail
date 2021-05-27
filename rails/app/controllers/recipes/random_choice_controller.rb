@@ -26,7 +26,7 @@ class Recipes::RandomChoiceController < ApplicationController
         end
       end
     else
-      @choice_materials = Material.have_material_ids_array
+      @choice_materials = []
     end
 
     if not material_mode

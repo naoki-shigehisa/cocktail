@@ -90,11 +90,11 @@ class Recipe < ApplicationRecord
     recipes.each{|recipe|
       recipe_materials = materials.select {|m| m[:recipe_id] == recipe[:id]}
       if mode == 0
-        can_flag = recipe_materials.all? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
+        can_flag = material_ids.all? {|id| recipe_materials.find { |m| id.to_i == m[:material_id] } }
       elsif mode == 1 
         can_flag = recipe_materials.any? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
       else
-        can_flag = material_ids.all? {|id| recipe_materials.find { |m| id.to_i == m[:material_id] } }
+        can_flag = recipe_materials.all? {|m| material_ids.find { |id| id.to_i == m[:material_id] } }
       end
 
       if can_flag

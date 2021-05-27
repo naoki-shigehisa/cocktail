@@ -51,9 +51,9 @@
       %ul.nav.nav-pills.nav-justified.my-1
         %li.nav-item{style: "#{choice_style}"}
           - if @material_mode == '0'
-            %a.nav-link.text-white.bg-secondary.active.p-1 これでできる
+            %a.nav-link.text-white.bg-secondary.active.p-1 全て含む
           - else
-            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=0&choice_materials=#{@choice_materials.join(',')}"} これでできる
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=0&choice_materials=#{@choice_materials.join(',')}"} 全て含む
         %li.nav-item{style: "#{choice_style}"}
           - if @material_mode == '1'
             %a.nav-link.text-white.bg-secondary.active.p-1 どれかを含む
@@ -61,9 +61,9 @@
             %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=1&choice_materials=#{@choice_materials.join(',')}"} どれかを含む
         %li.nav-item{style: "#{choice_style}"}
           - if @material_mode == '2'
-            %a.nav-link.text-white.bg-secondary.active.p-1 全て含む
+            %a.nav-link.text-white.bg-secondary.active.p-1 これでできる
           - else
-            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=2&choice_materials=#{@choice_materials.join(',')}"} 全て含む
+            %a.nav-link.text-dark.p-1{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=2&choice_materials=#{@choice_materials.join(',')}"} これでできる
       
       %a.badge.badge-pill.badge-secondary.text-light{href: "/recipes/random_choice/terms?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material=99999&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}"}
         全て選択
