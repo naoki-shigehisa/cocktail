@@ -1,14 +1,10 @@
 .m-3  
   %ul.list-group  
     - @orders.each do |o|
-      .row.d-flex.align-items-center.my-1
-        .col-9
-          %a.list-group-item{href: "/recipes/detail/#{o[:recipe_id]}"}
-            %span.text-dark.font-weight-bold
-              = o[:name]
-            %br
-            - if o[:name_entered] != ""
-              %span.badge.badge-pill.badge-light.text-secondary
-                = "#{o[:name_entered]}"
-        .col-3
-          %a.btn.btn-secondary.btn-sm.text-white.mr-1{href:"/orders/done/#{o[:id]}"} DONE
+      %a.list-group-item{href: "/orders/detail/#{o[:recipe_id]}?order_id=#{o[:id]}"}
+        %span.text-dark.font-weight-bold
+          = o[:name]
+        %br
+        - if o[:name_entered] != ""
+          %span.badge.badge-pill.badge-light.text-secondary
+            = "#{o[:name_entered]}"

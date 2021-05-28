@@ -3,6 +3,14 @@ class Orders::IndexController < ApplicationController
     @orders = Order.order_recipes_array
   end
 
+  def detail
+    recipe_id = params[:id]
+
+    @order_id = params[:order_id]
+    @recipe_detail = Recipe.detail(recipe_id)
+    @materials = RecipeMaterial.recipe_materials_array(recipe_id)
+  end
+
   def create
     order = Order.create(recipe_id:params[:recipe_id], name_entered: params[:name_entered])
   end
