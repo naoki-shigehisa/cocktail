@@ -22,33 +22,29 @@ class Recipe < ApplicationRecord
     return self
             .all
             .order(:name)
-            .preload(:style,:tech,:alcohol)
+            .preload(:style,:tech,:alcohol,recipe_materials: :material)
             .map{|r|
               {
                 "id": r.id,
                 "name": r.name,
                 "style": r.style.name,
                 "tech": r.tech.name,
-                "alcohol": r.alcohol.name
+                "alcohol": r.alcohol.name,
+                "base": r.recipe_materials
+                          .map{|r_m|
+                            {
+                              "name": r_m.material.name,
+                              "base_flag": r_m.base_flag
+                            } 
+                          }
+                          .find{|r_m| r_m[:base_flag]}[:name]
               }
             }
   end
 
   # 今ある材料で作れるレシピを取得
   def self.can_recipes_array
-      recipes = self
-                  .select(:id,:name,:style_id,:tech_id,:alcohol_id)
-                  .order(:name)
-                  .preload(:style,:tech,:alcohol)
-                  .map{|r|
-                    {
-                      "id": r.id,
-                      "name": r.name,
-                      "style": r.style.name,
-                      "tech": r.tech.name,
-                      "alcohol": r.alcohol.name
-                    }
-                  }
+      recipes = self.all_recipes_array
 
       have_flags = RecipeMaterial
                     .select(:id,:recipe_id,:material_id,:option_flag)
