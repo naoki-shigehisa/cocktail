@@ -61,33 +61,15 @@
 
   - if not @current_user.nil?
     %ul.nav.nav-pills.nav-fill.my-3
-      %li.nav-item
-        - if @assessment == 1
-          %a.nav-link.text-white.bg-secondary.active.p-1 Average
-        - else
-          %form{:name => "form_1", :method => "post", :action => "/reviews/create"}
-            %input{:type => "hidden", :name => "user_id", :value => "#{@current_user}"}
-            %input{:type => "hidden", :name => "recipe_id", :value => "#{@recipe_detail.id}"}
-            %input{:type => "hidden", :name => "assessment", :value => 1}
-            %a.nav-link.text-dark.bg-light.p-1.mx-1{:href => "javascript:form_1.submit()"}
-              Average
-      %li.nav-item
-        - if @assessment == 2
-          %a.nav-link.text-white.bg-secondary.active.p-1 Good
-        - else
-          %form{:name => "form_2", :method => "post", :action => "/reviews/create"}
-            %input{:type => "hidden", :name => "user_id", :value => "#{@current_user}"}
-            %input{:type => "hidden", :name => "recipe_id", :value => "#{@recipe_detail.id}"}
-            %input{:type => "hidden", :name => "assessment", :value => 2}
-            %a.nav-link.text-dark.bg-light.p-1.mx-1{:href => "javascript:form_2.submit()"}
-              Good
-      %li.nav-item
-        - if @assessment == 3
-          %a.nav-link.text-white.bg-secondary.active.p-1 Excellent
-        - else
-          %form{:name => "form_3", :method => "post", :action => "/reviews/create"}
-            %input{:type => "hidden", :name => "user_id", :value => "#{@current_user}"}
-            %input{:type => "hidden", :name => "recipe_id", :value => "#{@recipe_detail.id}"}
-            %input{:type => "hidden", :name => "assessment", :value => 3}
-            %a.nav-link.text-dark.bg-light.p-1.mx-1{:href => "javascript:form_3.submit()"}
-              Excellent
+      - @assessments.each do |assessment|
+        %li.nav-item
+          - if @assessment == assessment.id
+            %a.nav-link.text-white.bg-secondary.active.p-1 
+              = assessment.name
+          - else
+            %form{:name => "form_#{assessment.id}", :method => "post", :action => "/reviews/create"}
+              %input{:type => "hidden", :name => "user_id", :value => "#{@current_user}"}
+              %input{:type => "hidden", :name => "recipe_id", :value => "#{@recipe_detail.id}"}
+              %input{:type => "hidden", :name => "assessment", :value => assessment.id}
+              %a.nav-link.text-dark.bg-light.p-1.mx-1{:href => "javascript:form_#{assessment.id}.submit()"}
+                = assessment.name

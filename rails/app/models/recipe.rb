@@ -116,4 +116,16 @@ class Recipe < ApplicationRecord
 
     @recipes
   end
+
+  # レシピ情報にユーザーの評価を追加
+  def self.add_assessment(recipes, user_id)
+    reviews = Review.find_by_user(user_id)
+    for i in 0...recipes.size
+      review = reviews.find{|r| r.recipe_id == recipes[i][:id]}
+      if not review.nil?
+        recipes[i][:assessment] = review.assessment.name
+      end
+    end
+    return recipes
+  end
 end

@@ -27,9 +27,12 @@
   %ul.list-group
     - @recipes.each do |r|
       %a.list-group-item{href: "/recipes/detail/#{r[:id]}"}
-        %span.text-dark.font-weight-bold
-          = r[:name]
-        %br
+        .d-flex.align-items-center
+          %span.text-dark.font-weight-bold
+            = r[:name]
+          - if not r[:assessment].nil?
+            %span.badge.badge-pill.badge-secondary.ml-1
+              = r[:assessment]
         %span.badge.badge-pill.badge-light.text-secondary
           = r[:base]
         %span.badge.badge-pill.badge-light.text-secondary
