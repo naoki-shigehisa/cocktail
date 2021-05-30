@@ -38,10 +38,13 @@ class Recipes::RandomChoiceController < ApplicationController
       @message = 1
     end
 
+    @current_user = User.current_user(cookies)
+
     @styles = Style.all
     @techs = Tech.all
     @alcohols = Alcohol.all
     @materials = Material.have_materials
+
     @style = style
     @tech = tech
     @alcohol = alcohol

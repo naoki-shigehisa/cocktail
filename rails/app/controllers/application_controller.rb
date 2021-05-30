@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     def welcome
-        @current_user = User.current_user(cookies)
+        @current_user = User.current_user_id(cookies)
         render 'layouts/welcome'
     end
 

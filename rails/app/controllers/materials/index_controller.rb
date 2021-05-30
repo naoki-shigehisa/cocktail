@@ -12,7 +12,7 @@ class Materials::IndexController < ApplicationController
     recipe_ids = RecipeMaterial.recipe_ids_by_material_array(material_id)
     @recipes = Recipe.where(id: recipe_ids).can_recipes_array
 
-    current_user = User.current_user(cookies)
+    current_user = User.current_user_id(cookies)
     if not current_user.nil?
       @recipes = Recipe.add_assessment(@recipes, current_user)
     end

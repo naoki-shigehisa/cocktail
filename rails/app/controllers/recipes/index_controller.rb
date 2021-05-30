@@ -51,7 +51,7 @@ class Recipes::IndexController < ApplicationController
     end
     @recipes = @recipes.can_recipes_by_term_array(@choice_materials, material_mode.to_i)
 
-    current_user = User.current_user(cookies)
+    current_user = User.current_user_id(cookies)
     if not current_user.nil?
       @recipes = Recipe.add_assessment(@recipes, current_user)
     end
@@ -78,7 +78,7 @@ class Recipes::IndexController < ApplicationController
 
     @current_user = User.current_user(cookies)
     if not @current_user.nil?
-      @assessment = Review.get_assessment(@recipe_detail.id, @current_user)
+      @assessment = Review.get_assessment(@recipe_detail.id, @current_user.id)
     end
   end
 
