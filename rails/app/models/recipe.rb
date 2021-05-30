@@ -1,7 +1,7 @@
 class Recipe < ApplicationRecord
   has_many :recipe_materials
   has_many :orders
-  has_many :recipes
+  has_many :reviews
   belongs_to :tech
   belongs_to :style
   belongs_to :alcohol
