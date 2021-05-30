@@ -15,7 +15,7 @@ class Orders::IndexController < ApplicationController
 
   # 注文
   def create
-    order = Order.create(recipe_id:params[:recipe_id], name_entered: params[:name_entered])
+    order = Order.create(recipe_id:params[:recipe_id], name_entered: params[:name_entered], user_id: params[:user_id])
   end
 
   # 作成完了

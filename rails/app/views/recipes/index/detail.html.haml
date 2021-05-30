@@ -63,6 +63,7 @@
   - else
     %form.input-group.mt-3{:method => "get", :action => "/orders/create/#{@recipe_detail.id}"}
       %input{:type => "hidden", :name => "name_entered", :value => "#{@current_user.name}"}
+      %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
       %button.btn.btn-secondary.btn-block{:type => "submit"}
         <i class="fas fa-cocktail"></i> 注文する
     

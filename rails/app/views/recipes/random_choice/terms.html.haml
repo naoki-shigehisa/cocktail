@@ -98,6 +98,7 @@
   - else
     %form.input-group.my-3{:method => "get", :action => "/recipes/random_choice/order_secret"}
       %input{:type => "hidden", :name => "name_entered", :value => "#{@current_user.name}"}
+      %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
       %input{:type => "hidden", :name => "style", :value => "#{@style}"}
       %input{:type => "hidden", :name => "tech", :value => "#{@tech}"}
       %input{:type => "hidden", :name => "alcohol", :value => "#{@alcohol}"}
