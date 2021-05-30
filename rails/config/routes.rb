@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get '/detail/:id', to: 'index#detail'
     get '/create/:recipe_id', to: 'index#create'
     get '/done/:id', to:'index#done'
+    get '/done_by_user/:id', to:'index#done_by_user'
   end
 
   namespace :users do
