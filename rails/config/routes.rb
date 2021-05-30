@@ -28,6 +28,12 @@ Rails.application.routes.draw do
     get '/done/:id', to:'index#done'
   end
 
+  namespace :users do
+    get 'login_page', to: 'index#login_page'
+    get 'login', to: 'index#login'
+    get 'logout', to: 'index#logout'
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
