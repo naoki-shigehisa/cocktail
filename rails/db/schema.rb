@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_29_060505) do
+ActiveRecord::Schema.define(version: 2021_05_30_040234) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 2021_05_29_060505) do
     t.index ["tech_id"], name: "fk_rails_8c8778d2c9"
   end
 
+  create_table "reviews", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "assessment", default: 0, null: false
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "recipe_id", null: false
+    t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "styles", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -84,4 +95,5 @@ ActiveRecord::Schema.define(version: 2021_05_29_060505) do
   add_foreign_key "recipes", "alcohols"
   add_foreign_key "recipes", "styles"
   add_foreign_key "recipes", "teches"
+  add_foreign_key "reviews", "recipes"
 end

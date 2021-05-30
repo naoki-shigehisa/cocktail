@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    has_many :reviews
+
     def self.current_user(cookies)
         if cookies[:user_id]
             return cookies[:user_id]

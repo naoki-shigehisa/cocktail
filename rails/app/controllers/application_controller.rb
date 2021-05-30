@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
     def welcome
         @current_user = User.current_user(cookies)
-        logger.debug(cookies[:user_id])
-        logger.debug(@current_user)
         render 'layouts/welcome'
     end
 

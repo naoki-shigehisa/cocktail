@@ -68,6 +68,11 @@ class Recipes::IndexController < ApplicationController
 
     @recipe_detail = Recipe.detail(recipe_id)
     @materials = RecipeMaterial.recipe_materials_array(recipe_id)
+    @current_user = User.current_user(cookies)
+
+    if not @current_user.nil?
+      @assessment = Review.get_assessment(@recipe_detail.id, @current_user)
+    end
   end
 
   # 全てのレシピ

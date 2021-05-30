@@ -1,6 +1,4 @@
 class Users::IndexController < ApplicationController
-    protect_from_forgery
-
     # ログインページ
     def login_page
         if params[:message]
@@ -17,7 +15,6 @@ class Users::IndexController < ApplicationController
             redirect_to '/users/login_page?message=1'
         else
             cookies.permanent[:user_id] = user_id[0]
-            logger.debug(cookies[:user_id])
             redirect_to '/'
         end
     end
