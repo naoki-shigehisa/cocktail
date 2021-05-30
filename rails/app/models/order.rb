@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :recipe
+  belongs_to :user, optional: true
 
   scope :not_make, -> { where("done_flag = ?", false) }
 

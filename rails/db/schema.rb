@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_092732) do
+ActiveRecord::Schema.define(version: 2021_05_30_081546) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "assessments", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,7 +38,9 @@ ActiveRecord::Schema.define(version: 2021_05_26_092732) do
     t.boolean "done_flag", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["recipe_id"], name: "index_orders_on_recipe_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "recipe_materials", charset: "utf8mb4", force: :cascade do |t|
@@ -59,6 +67,18 @@ ActiveRecord::Schema.define(version: 2021_05_26_092732) do
     t.index ["tech_id"], name: "fk_rails_8c8778d2c9"
   end
 
+  create_table "reviews", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "assessment_id", null: false
+    t.index ["assessment_id"], name: "index_reviews_on_assessment_id"
+    t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "styles", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -71,10 +91,19 @@ ActiveRecord::Schema.define(version: 2021_05_26_092732) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "orders", "recipes"
+  add_foreign_key "orders", "users"
   add_foreign_key "recipe_materials", "materials"
   add_foreign_key "recipe_materials", "recipes"
   add_foreign_key "recipes", "alcohols"
   add_foreign_key "recipes", "styles"
   add_foreign_key "recipes", "teches"
+  add_foreign_key "reviews", "recipes"
 end

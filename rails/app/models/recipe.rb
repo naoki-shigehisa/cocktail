@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   has_many :recipe_materials
   has_many :orders
+  has_many :recipes
   belongs_to :tech
   belongs_to :style
   belongs_to :alcohol
@@ -114,5 +115,17 @@ class Recipe < ApplicationRecord
     end
 
     @recipes
+  end
+
+  # レシピ情報にユーザーの評価を追加
+  def self.add_assessment(recipes, user_id)
+    reviews = Review.find_by_user(user_id)
+    for i in 0...recipes.size
+      review = reviews.find{|r| r.recipe_id == recipes[i][:id]}
+      if not review.nil?
+        recipes[i][:assessment] = review.assessment.name
+      end
+    end
+    return recipes
   end
 end

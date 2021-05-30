@@ -38,10 +38,13 @@ class Recipes::RandomChoiceController < ApplicationController
       @message = 1
     end
 
+    @current_user = User.current_user(cookies)
+
     @styles = Style.all
     @techs = Tech.all
     @alcohols = Alcohol.all
     @materials = Material.have_materials
+
     @style = style
     @tech = tech
     @alcohol = alcohol
@@ -82,7 +85,7 @@ class Recipes::RandomChoiceController < ApplicationController
       redirect_to "/recipes/random_choice/terms?style=#{style}&tech=#{tech}&alcohol=#{alcohol}&material_mode=#{material_mode}&choice_materials=#{choice_materials}&message=1"
     else
       id = @recipes.sample[:id]
-      order = Order.create(recipe_id:id, name_entered: params[:name_entered])
+      order = Order.create(recipe_id:id, name_entered: params[:name_entered], user_id: params[:user_id])
       render 'orders/index/create'
     end
   end

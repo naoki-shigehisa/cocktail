@@ -2,6 +2,8 @@ class RecipeMaterial < ApplicationRecord
     belongs_to :recipe
     belongs_to :material
 
+    scope :base, -> { where("base_flag = ?", true) }
+
     # 特定のレシピの材料の情報を取得
     def self.recipe_materials_array(recipe_id)
         return self

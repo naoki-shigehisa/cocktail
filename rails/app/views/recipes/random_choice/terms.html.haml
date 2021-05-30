@@ -83,13 +83,27 @@
   %a.btn.btn-secondary.btn-block.my-3{href: "/recipes/random_choice/order?style=#{@style}&tech=#{@tech}&alcohol=#{@alcohol}&material_mode=#{@material_mode}&choice_materials=#{@choice_materials.join(',')}", role: "button"}
     <i class="fas fa-random"></i> ランダムチョイス
 
-  %form.input-group.my-3{:method => "get", :action => "/recipes/random_choice/order_secret"}
-    %input.form-control{:type => "text", :placeholder => "your name", :name => "name_entered", :aria-describedby => "order", :style => "border-color: #DDDDDD	; box-shadow: none;"}
-    %input{:type => "hidden", :name => "style", :value => "#{@style}"}
-    %input{:type => "hidden", :name => "tech", :value => "#{@tech}"}
-    %input{:type => "hidden", :name => "alcohol", :value => "#{@alcohol}"}
-    %input{:type => "hidden", :name => "material_mode", :value => "#{@material_mode}"}
-    %input{:type => "hidden", :name => "choice_materials", :value => "#{@choice_materials.join(',')}"}
-    .input-group-append
-      %button.btn.btn-secondary#order{:type => "submit"}
+  - if @current_user.nil?
+    %form.input-group.my-3{:method => "get", :action => "/recipes/random_choice/order_secret"}
+      %input.form-control{:type => "text", :placeholder => "your name", :name => "name_entered", :aria-describedby => "order", :style => "border-color: #DDDDDD	; box-shadow: none;"}
+      %input{:type => "hidden", :name => "style", :value => "#{@style}"}
+      %input{:type => "hidden", :name => "tech", :value => "#{@tech}"}
+      %input{:type => "hidden", :name => "alcohol", :value => "#{@alcohol}"}
+      %input{:type => "hidden", :name => "material_mode", :value => "#{@material_mode}"}
+      %input{:type => "hidden", :name => "choice_materials", :value => "#{@choice_materials.join(',')}"}
+      .input-group-append
+        %button.btn.btn-secondary#order{:type => "submit"}
+          <i class="fas fa-user-secret"></i> シークレット
+
+  - else
+    %form.input-group.my-3{:method => "get", :action => "/recipes/random_choice/order_secret"}
+      %input{:type => "hidden", :name => "name_entered", :value => "#{@current_user.name}"}
+      %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
+      %input{:type => "hidden", :name => "style", :value => "#{@style}"}
+      %input{:type => "hidden", :name => "tech", :value => "#{@tech}"}
+      %input{:type => "hidden", :name => "alcohol", :value => "#{@alcohol}"}
+      %input{:type => "hidden", :name => "material_mode", :value => "#{@material_mode}"}
+      %input{:type => "hidden", :name => "choice_materials", :value => "#{@choice_materials.join(',')}"}
+      %button.btn.btn-secondary.btn-block{:type => "submit"}
         <i class="fas fa-user-secret"></i> シークレット
+    

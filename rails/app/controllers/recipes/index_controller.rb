@@ -51,10 +51,16 @@ class Recipes::IndexController < ApplicationController
     end
     @recipes = @recipes.can_recipes_by_term_array(@choice_materials, material_mode.to_i)
 
+    current_user = User.current_user_id(cookies)
+    if not current_user.nil?
+      @recipes = Recipe.add_assessment(@recipes, current_user)
+    end
+
     @styles = Style.all
     @techs = Tech.all
     @alcohols = Alcohol.all
     @materials = Material.have_materials
+
     @style = style
     @tech = tech
     @alcohol = alcohol
@@ -68,6 +74,12 @@ class Recipes::IndexController < ApplicationController
 
     @recipe_detail = Recipe.detail(recipe_id)
     @materials = RecipeMaterial.recipe_materials_array(recipe_id)
+    @assessments = Assessment.for_review
+
+    @current_user = User.current_user(cookies)
+    if not @current_user.nil?
+      @assessment = Review.get_assessment(@recipe_detail.id, @current_user.id)
+    end
   end
 
   # 全てのレシピ
