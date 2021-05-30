@@ -1,16 +1,20 @@
 <div class="jumbotron">
   <div align="center">
     <h5 class="display-6">まあまあ適当なカクテルバー</h5>
-    <p class="lead">Welcome to Cocktail BAR.</p>
+    <% if @current_user.nil? %>
+      <p class="lead">Welcome to Cocktail BAR.</p>
+    <% else %>
+      <p class="lead">Welcome <%= @current_user.name %></p>
+    <% end %>
     <hr class="my-4">
     <%= image_tag 'bar_image.jpeg', width: '70%', height: '70%' %>
     <a class="btn btn-secondary btn-lg mx-3 mt-4" href="/recipes/menu" role="button"><i class="fas fa-glass-cheers"></i>　Go to Recipies</a>
-    <a class="btn btn-secondary btn-lg mx-3 mt-4" href="/do_not_come_to_shigehisa" role="button">しげひさを呼ぶ</a>
+    <a class="btn btn-secondary ml-3 mt-4" href="/do_not_come_to_shigehisa" role="button">しげひさを呼ぶ</a>
 
     <% if @current_user.nil? %>
-      <a class="btn btn-secondary btn-lg mx-3 mt-4" href="/users/login_page" role="button">ログイン</a>
+      <a class="btn btn-secondary mr-3 mt-4" href="/users/login_page" role="button">ログイン</a>
     <% else %>
-      <a class="btn btn-secondary btn-lg mx-3 mt-4" href="/users/logout" role="button">ログアウト</a>
+      <a class="btn btn-secondary mr-3 mt-4" href="/users/logout" role="button">ログアウト</a>
     <% end %>
   </div> 
 </div>
