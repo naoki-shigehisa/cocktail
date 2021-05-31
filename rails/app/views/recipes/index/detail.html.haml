@@ -4,6 +4,34 @@
     %h4
       = @recipe_detail.name
 
+  - if @current_user.nil?
+    %form.input-group.my-3{:method => "get", :action => "/orders/create/#{@recipe_detail.id}"}
+      %input.form-control{:type => "text", :placeholder => "your name", :name => "name_entered", :aria-describedby => "order", :style => "border-color: #DDDDDD	; box-shadow: none;"}
+      .input-group-append
+        %button.btn.btn-secondary#order{:type => "submit"}
+          <i class="fas fa-cocktail"></i> 注文する
+  
+  - else
+    %ul.nav.nav-pills.nav-fill.mt-3
+      - @assessments.each do |assessment|
+        %li.nav-item
+          - if @assessment == assessment.id
+            %a.nav-link.text-white.bg-secondary.active.p-1 
+              = assessment.name
+          - else
+            %form{:name => "form_#{assessment.id}", :method => "post", :action => "/reviews/create"}
+              %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
+              %input{:type => "hidden", :name => "recipe_id", :value => "#{@recipe_detail.id}"}
+              %input{:type => "hidden", :name => "assessment", :value => assessment.id}
+              %a.nav-link.text-dark.bg-light.p-1.mx-1{:href => "javascript:form_#{assessment.id}.submit()"}
+                = assessment.name
+
+    %form.input-group.my-3{:method => "get", :action => "/orders/create/#{@recipe_detail.id}"}
+      %input{:type => "hidden", :name => "name_entered", :value => "#{@current_user.name}"}
+      %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
+      %button.btn.btn-secondary.btn-block{:type => "submit"}
+        <i class="fas fa-cocktail"></i> 注文する
+
   %table.table.m-0
     %tr
       %th スタイル
@@ -52,31 +80,3 @@
             - if m[:option_flag]
               .col.text-right.m-0.p-0
                 %span.text-muted オプション
-
-  - if @current_user.nil?
-    %form.input-group.mt-3{:method => "get", :action => "/orders/create/#{@recipe_detail.id}"}
-      %input.form-control{:type => "text", :placeholder => "your name", :name => "name_entered", :aria-describedby => "order", :style => "border-color: #DDDDDD	; box-shadow: none;"}
-      .input-group-append
-        %button.btn.btn-secondary#order{:type => "submit"}
-          <i class="fas fa-cocktail"></i> 注文する
-  
-  - else
-    %form.input-group.mt-3{:method => "get", :action => "/orders/create/#{@recipe_detail.id}"}
-      %input{:type => "hidden", :name => "name_entered", :value => "#{@current_user.name}"}
-      %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
-      %button.btn.btn-secondary.btn-block{:type => "submit"}
-        <i class="fas fa-cocktail"></i> 注文する
-    
-    %ul.nav.nav-pills.nav-fill.my-3
-      - @assessments.each do |assessment|
-        %li.nav-item
-          - if @assessment == assessment.id
-            %a.nav-link.text-white.bg-secondary.active.p-1 
-              = assessment.name
-          - else
-            %form{:name => "form_#{assessment.id}", :method => "post", :action => "/reviews/create"}
-              %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
-              %input{:type => "hidden", :name => "recipe_id", :value => "#{@recipe_detail.id}"}
-              %input{:type => "hidden", :name => "assessment", :value => assessment.id}
-              %a.nav-link.text-dark.bg-light.p-1.mx-1{:href => "javascript:form_#{assessment.id}.submit()"}
-                = assessment.name
