@@ -67,6 +67,12 @@ class Recipes::RandomChoiceController < ApplicationController
       id = @recipes.sample[:id]
       @recipe_detail = Recipe.detail(id)
       @materials = RecipeMaterial.recipe_materials_array(id)
+      @assessments = Assessment.for_review
+      
+      @current_user = User.current_user(cookies)
+      if not @current_user.nil?
+        @assessment = Review.get_assessment(@recipe_detail.id, @current_user.id)
+      end
       render 'recipes/index/detail'
     end
   end
