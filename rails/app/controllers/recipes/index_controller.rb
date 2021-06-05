@@ -91,4 +91,13 @@ class Recipes::IndexController < ApplicationController
   def menu_only_name
     @recipes = Recipe.can_recipes_array
   end
+
+  # 飲んだレシピを表示
+  def drank
+    current_user_id = User.current_user_id(cookies)
+    if not current_user_id.nil?
+      @recipes = Recipe.recipes_drank_array(current_user_id)
+      @recipes = Recipe.add_assessment(@recipes, current_user_id)
+    end
+  end
 end

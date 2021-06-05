@@ -117,6 +117,33 @@ class Recipe < ApplicationRecord
     @recipes
   end
 
+  # 特定のユーザーが飲んだレシピを取得
+  def self.recipes_drank_array(user_id)
+    return self
+            .all
+            .order(:name)
+            .eager_load(:reviews)
+            .where(reviews: {user_id: user_id})
+            .preload(:style,:tech,:alcohol,recipe_materials: :material)
+            .map{|r|
+              {
+                "id": r.id,
+                "name": r.name,
+                "style": r.style.name,
+                "tech": r.tech.name,
+                "alcohol": r.alcohol.name,
+                "base": r.recipe_materials
+                          .map{|r_m|
+                            {
+                              "name": r_m.material.name,
+                              "base_flag": r_m.base_flag
+                            } 
+                          }
+                          .find{|r_m| r_m[:base_flag]}[:name]
+              }
+            }
+  end
+
   # レシピ情報にユーザーの評価を追加
   def self.add_assessment(recipes, user_id)
     reviews = Review.find_by_user(user_id)

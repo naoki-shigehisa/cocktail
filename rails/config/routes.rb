@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get '/menu', to: 'index#menu'
     get '/detail/:id', to: 'index#detail'
     get '/menu_only_name', to: 'index#menu_only_name'
+    get '/drank', to: 'index#drank'
 
     # random_choice
     get 'random_choice/terms', to: 'random_choice#terms'
