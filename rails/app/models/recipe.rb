@@ -124,7 +124,7 @@ class Recipe < ApplicationRecord
             .order(:name)
             .eager_load(:reviews)
             .where(reviews: {user_id: user_id})
-            .preload(:style,:tech,:alcohol,recipe_materials: :material)
+            .preload(:style,:tech,:alcohol,:reviews,recipe_materials: :material)
             .map{|r|
               {
                 "id": r.id,
@@ -139,7 +139,8 @@ class Recipe < ApplicationRecord
                               "base_flag": r_m.base_flag
                             } 
                           }
-                          .find{|r_m| r_m[:base_flag]}[:name]
+                          .find{|r_m| r_m[:base_flag]}[:name],
+                "assessment": r.reviews.last.assessment.name
               }
             }
   end

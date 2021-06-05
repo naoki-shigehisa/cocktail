@@ -97,7 +97,8 @@ class Recipes::IndexController < ApplicationController
     current_user_id = User.current_user_id(cookies)
     if not current_user_id.nil?
       @recipes = Recipe.recipes_drank_array(current_user_id)
-      @recipes = Recipe.add_assessment(@recipes, current_user_id)
+    else
+      @recipes = []
     end
   end
 end
