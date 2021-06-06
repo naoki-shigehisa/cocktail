@@ -40,6 +40,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/recipes/random_choice/terms?style=0&tech=0&alcohol=0">Random Choice</a>
           </li>
+          <% if @current_user_id == "1" %>
+            <li class="nav-item">
+              <a class="nav-link" href="/orders">Orders</a>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>
