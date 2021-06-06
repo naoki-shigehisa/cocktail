@@ -5,6 +5,7 @@ class Recipe < ApplicationRecord
   belongs_to :tech
   belongs_to :style
   belongs_to :alcohol
+  belongs_to :user
 
   scope :narrow_style, -> (style) { where("style_id = ?", style) }
   scope :narrow_tech, -> (tech) { where("tech_id = ?", tech) }
@@ -13,7 +14,7 @@ class Recipe < ApplicationRecord
   # 特定のレシピの情報を取得
   def self.detail(recipe_id)
     return self
-            .select(:id,:name,:style_id,:tech_id,:alcohol_id)
+            .select(:id,:name,:style_id,:tech_id,:alcohol_id,:user_id)
             .joins(:style,:tech,:alcohol)
             .find(recipe_id)
   end

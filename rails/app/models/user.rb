@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_many :reviews
     has_many :orders
+    has_many :recipes
 
     def self.current_user_id(cookies)
         if cookies[:user_id]
