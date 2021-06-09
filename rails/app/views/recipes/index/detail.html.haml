@@ -1,9 +1,9 @@
 - choice_style = "font-size: 0.8rem"
 .m-3
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.my-3
-    - if not @recipe_detail.user_id.nil?
-      %span.badge.badge-pill.badge-secondary.mb-1
-        オリジナル
+  - if not @recipe_detail.user_id.nil?
+    %span.badge.badge-pill.badge-secondary.mb-1
+      オリジナル
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
     %h4
       = @recipe_detail.name
 
