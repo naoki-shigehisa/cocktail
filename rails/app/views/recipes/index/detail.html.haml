@@ -2,7 +2,7 @@
 .m-3
   - if not @recipe_detail.user_id.nil?
     %span.badge.badge-pill.badge-secondary.mb-1
-      オリジナル
+      = "オリジナル by #{@recipe_detail.user.name}" 
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
     %h4
       = @recipe_detail.name
