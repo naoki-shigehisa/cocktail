@@ -1,11 +1,7 @@
 class Users::IndexController < ApplicationController
     # ログインページ
     def login_page
-        if params[:message]
-            @message = true
-        else
-            @message = false
-        end
+        @message = !params[:message].nil?
     end
 
     # ログイン
