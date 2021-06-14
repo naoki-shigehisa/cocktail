@@ -1,7 +1,7 @@
 %form.m-3{:method => "get", :action => "/users/login"}
-    %input.form-control.my-3{:type => "text", :placeholder => "your name", :name => "name", :aria-describedby => "login", :required => true, :autofocus => true, :style => "border-color: #DDDDDD	; box-shadow: none;"}
-    %input.form-control.my-3{:type => "text", :placeholder => "password", :name => "password", :aria-describedby => "login", :required => true, :style => "border-color: #DDDDDD	; box-shadow: none;"}
-    - if @message
-        .text-center.small.mb-3 ※名前もしくはパスワードが誤っています
-    %button.btn.btn-block.btn-secondary#order{:type => "submit"}
-        ログイン
+  %input.form-control.my-3{:type => "text", :placeholder => "your name", :name => "name", :aria-describedby => "login", :required => true, :autofocus => true, :style => "border-color: #DDDDDD	; box-shadow: none;"}
+  %input.form-control.my-3{:type => "text", :placeholder => "password", :name => "password", :aria-describedby => "login", :required => true, :style => "border-color: #DDDDDD	; box-shadow: none;"}
+  - if @message
+    .text-center.small.mb-3 ※名前もしくはパスワードが誤っています
+  %button.btn.btn-block.btn-secondary#order{:type => "submit"}
+    ログイン

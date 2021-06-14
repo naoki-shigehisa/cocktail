@@ -1,21 +1,21 @@
 .m-3
-    .my-2
-        %strong
-            = "飲んだレシピ数：#{@recipes.size}件"
-        %ul.list-group  
-            - @recipes.each do |r|
-                %a.list-group-item{href: "/recipes/detail/#{r[:id]}"}
-                    .d-flex.align-items-center
-                        %span.text-dark.font-weight-bold
-                            = r[:name]
-                            - unless r[:assessment].nil?
-                                %span.badge.badge-pill.badge-secondary.ml-1
-                                    = r[:assessment]
-                    %span.badge.badge-pill.badge-light.text-secondary
-                        = r[:base]
-                    %span.badge.badge-pill.badge-light.text-secondary
-                        = r[:style]
-                    %span.badge.badge-pill.badge-light.text-secondary
-                        = r[:tech]
-                    %span.badge.badge-pill.badge-light.text-secondary
-                        = r[:alcohol]
+  .my-2
+    %strong
+      = "飲んだレシピ数：#{@recipes.size}件"
+    %ul.list-group  
+      - @recipes.each do |r|
+        %a.list-group-item{href: "/recipes/detail/#{r[:id]}"}
+          .d-flex.align-items-center
+            %span.text-dark.font-weight-bold
+              = r[:name]
+              - unless r[:assessment].nil?
+                %span.badge.badge-pill.badge-secondary.ml-1
+                  = r[:assessment]
+          %span.badge.badge-pill.badge-light.text-secondary
+            = r[:base]
+          %span.badge.badge-pill.badge-light.text-secondary
+            = r[:style]
+          %span.badge.badge-pill.badge-light.text-secondary
+            = r[:tech]
+          %span.badge.badge-pill.badge-light.text-secondary
+            = r[:alcohol]
