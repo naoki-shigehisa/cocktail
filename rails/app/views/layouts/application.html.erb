@@ -32,7 +32,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/recipes/menu_only_name">Recipes Only Name</a>
           </li>
-          <% if not @current_user_id.nil? %>
+          <% unless @current_user_id.nil? %>
             <li class="nav-item">
               <a class="nav-link" href="/recipes/drank">Recipes You Drank</a>
             </li>

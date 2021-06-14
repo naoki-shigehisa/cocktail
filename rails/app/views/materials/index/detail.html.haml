@@ -30,7 +30,7 @@
         .d-flex.align-items-center
           %span.text-dark.font-weight-bold
             = r[:name]
-          - if not r[:assessment].nil?
+          - unless r[:assessment].nil?
             %span.badge.badge-pill.badge-secondary.ml-1
               = r[:assessment]
         %span.badge.badge-pill.badge-light.text-secondary

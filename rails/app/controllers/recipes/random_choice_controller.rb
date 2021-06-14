@@ -29,7 +29,7 @@ class Recipes::RandomChoiceController < ApplicationController
       @choice_materials = []
     end
 
-    if not material_mode
+    unless material_mode
       material_mode = DEFAULT_MODE
     end
 
@@ -70,7 +70,7 @@ class Recipes::RandomChoiceController < ApplicationController
       @assessments = Assessment.for_review
       
       @current_user = User.current_user(cookies)
-      if not @current_user.nil?
+      unless @current_user.nil?
         @assessment = Review.get_assessment(@recipe_detail.id, @current_user.id)
       end
       render 'recipes/index/detail'

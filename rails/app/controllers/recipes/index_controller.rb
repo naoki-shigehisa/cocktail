@@ -46,13 +46,13 @@ class Recipes::IndexController < ApplicationController
       @choice_materials = []
     end
 
-    if not material_mode
+    unless material_mode
       material_mode = DEFAULT_MODE
     end
     @recipes = @recipes.can_recipes_by_term_array(@choice_materials, material_mode.to_i)
 
     current_user = User.current_user_id(cookies)
-    if not current_user.nil?
+    unless current_user.nil?
       @recipes = Recipe.add_assessment(@recipes, current_user)
     end
 
@@ -77,7 +77,7 @@ class Recipes::IndexController < ApplicationController
     @assessments = Assessment.for_review
 
     @current_user = User.current_user(cookies)
-    if not @current_user.nil?
+    unless @current_user.nil?
       @assessment = Review.get_assessment(@recipe_detail.id, @current_user.id)
     end
   end
@@ -95,7 +95,7 @@ class Recipes::IndexController < ApplicationController
   # 飲んだレシピを表示
   def drank
     current_user_id = User.current_user_id(cookies)
-    if not current_user_id.nil?
+    unless current_user_id.nil?
       @recipes = Recipe.recipes_drank_array(current_user_id)
     else
       @recipes = []

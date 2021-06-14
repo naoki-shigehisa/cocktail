@@ -151,7 +151,7 @@ class Recipe < ApplicationRecord
     reviews = Review.find_by_user(user_id)
     for i in 0...recipes.size
       review = reviews.find{|r| r.recipe_id == recipes[i][:id]}
-      if not review.nil?
+      unless review.nil?
         recipes[i][:assessment] = review.assessment.name
       end
     end
