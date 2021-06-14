@@ -13,35 +13,35 @@ class Recipe < ApplicationRecord
 
   # 特定のレシピの情報を取得
   def self.detail(recipe_id)
-    return self
-            .select(:id,:name,:style_id,:tech_id,:alcohol_id,:user_id)
-            .joins(:style,:tech,:alcohol)
-            .find(recipe_id)
+    self
+      .select(:id,:name,:style_id,:tech_id,:alcohol_id,:user_id)
+      .joins(:style,:tech,:alcohol)
+      .find(recipe_id)
   end
 
   # 全てのレシピ情報を取得
   def self.all_recipes_array
-    return self
-            .all
-            .order(:name)
-            .preload(:style,:tech,:alcohol,recipe_materials: :material)
-            .map{|r|
-              {
-                "id": r.id,
-                "name": r.name,
-                "style": r.style.name,
-                "tech": r.tech.name,
-                "alcohol": r.alcohol.name,
-                "base": r.recipe_materials
-                          .map{|r_m|
-                            {
-                              "name": r_m.material.name,
-                              "base_flag": r_m.base_flag
-                            } 
-                          }
-                          .find{|r_m| r_m[:base_flag]}[:name]
-              }
-            }
+    self
+      .all
+      .order(:name)
+      .preload(:style,:tech,:alcohol,recipe_materials: :material)
+      .map{|r|
+        {
+          "id": r.id,
+          "name": r.name,
+          "style": r.style.name,
+          "tech": r.tech.name,
+          "alcohol": r.alcohol.name,
+          "base": r.recipe_materials
+                    .map{|r_m|
+                      {
+                        "name": r_m.material.name,
+                        "base_flag": r_m.base_flag
+                      } 
+                    }
+                    .find{|r_m| r_m[:base_flag]}[:name]
+        }
+      }
   end
 
   # 今ある材料で作れるレシピを取得
@@ -120,30 +120,30 @@ class Recipe < ApplicationRecord
 
   # 特定のユーザーが飲んだレシピを取得
   def self.recipes_drank_array(user_id)
-    return self
-            .all
-            .order(:name)
-            .eager_load(:reviews)
-            .where(reviews: {user_id: user_id})
-            .preload(:style,:tech,:alcohol,:reviews,recipe_materials: :material)
-            .map{|r|
-              {
-                "id": r.id,
-                "name": r.name,
-                "style": r.style.name,
-                "tech": r.tech.name,
-                "alcohol": r.alcohol.name,
-                "base": r.recipe_materials
-                          .map{|r_m|
-                            {
-                              "name": r_m.material.name,
-                              "base_flag": r_m.base_flag
-                            } 
-                          }
-                          .find{|r_m| r_m[:base_flag]}[:name],
-                "assessment": r.reviews.last.assessment.name
-              }
-            }
+    self
+      .all
+      .order(:name)
+      .eager_load(:reviews)
+      .where(reviews: {user_id: user_id})
+      .preload(:style,:tech,:alcohol,:reviews,recipe_materials: :material)
+      .map{|r|
+        {
+          "id": r.id,
+          "name": r.name,
+          "style": r.style.name,
+          "tech": r.tech.name,
+          "alcohol": r.alcohol.name,
+          "base": r.recipe_materials
+                    .map{|r_m|
+                      {
+                        "name": r_m.material.name,
+                        "base_flag": r_m.base_flag
+                      } 
+                    }
+                    .find{|r_m| r_m[:base_flag]}[:name],
+          "assessment": r.reviews.last.assessment.name
+        }
+      }
   end
 
   # レシピ情報にユーザーの評価を追加
@@ -155,6 +155,6 @@ class Recipe < ApplicationRecord
         recipes[i][:assessment] = review.assessment.name
       end
     end
-    return recipes
+    recipes
   end
 end
