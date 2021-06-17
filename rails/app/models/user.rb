@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   def self.current_user(cookies)
     if cookies[:user_id]
-      self.where("id = ?", cookies[:user_id]).first
+      self.where(id: cookies[:user_id]).first
     else
       nil
     end
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   def self.get_user_id(name, password)
     self
       .select(:id, :name, :password)
-      .where("(name = ?) AND (password = ?)", name, password)
-      .map{|u| u.id}
+      .where(name: name, password: password)
+      .pluck(:id)
   end
 end
