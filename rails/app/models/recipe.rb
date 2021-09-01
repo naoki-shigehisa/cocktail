@@ -123,9 +123,9 @@ class Recipe < ApplicationRecord
   def self.recipes_drank_array(user_id)
     self
       .all
-      .order(:name)
       .eager_load(:reviews)
       .where(reviews: {user_id: user_id})
+      .order(created_at: :desc)
       .preload(:style,:tech,:alcohol,:reviews,recipe_materials: :material)
       .map{|r|
         {
