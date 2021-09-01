@@ -17,4 +17,19 @@ class Order < ApplicationRecord
         }
       }
   end
+
+  def self.my_order_recipes_array(user_id)
+    Order
+      .not_make
+      .where(user_id: user_id)
+      .preload(:recipe)
+      .map{|o|
+        {
+          "id": o.id,
+          "name_entered": o.name_entered,
+          "recipe_id": o.recipe.id,
+          "name": o.recipe.name,
+        }
+      }
+  end
 end

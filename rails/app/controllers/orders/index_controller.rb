@@ -4,6 +4,16 @@ class Orders::IndexController < ApplicationController
     @orders = Order.order_recipes_array
   end
 
+  # 自分の注文一覧
+  def myorder
+    current_user_id = User.current_user_id(cookies)
+    if current_user_id.nil?
+      @orders = []
+    else
+      @orders = Order.my_order_recipes_array(current_user_id)
+    end
+  end
+
   # 注文詳細
   def detail
     recipe_id = params[:id]

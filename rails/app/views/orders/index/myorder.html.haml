@@ -1,0 +1,10 @@
+.m-3  
+  %ul.list-group  
+    - @orders.each do |o|
+      %a.list-group-item{href: "/orders/detail/#{o[:recipe_id]}?order_id=#{o[:id]}"}
+        %span.text-dark.font-weight-bold
+          = o[:name]
+        %br
+        - if o[:name_entered] != ""
+          %span.badge.badge-pill.badge-light.text-secondary
+            = "#{o[:name_entered]}"

@@ -52,11 +52,12 @@
               .col.text-right.m-0.p-0
                 %span.text-muted オプション
 
-  - if @order_detail.user_id.nil?
-    %a.btn.btn-secondary.btn-block.my-3{href: "/orders/done/#{@order_detail.id}", role: "button"}
-      <i class="fas fa-wine-bottle"></i> DONE
-  - else
-    %a.btn.btn-secondary.btn-block.my-3{href: "/orders/done/#{@order_detail.id}", role: "button"}
-      <i class="fas fa-wine-bottle"></i> キャンセル
-    %a.btn.btn-secondary.btn-block.my-3{href: "/orders/done_by_user/#{@order_detail.id}?recipe_id=#{@order_detail.recipe_id}&user_id=#{@order_detail.user_id}", role: "button"}
-      <i class="fas fa-wine-bottle"></i> DONE
+  - if ["1", "3"].include?(@current_user_id)
+    - if @order_detail.user_id.nil?
+      %a.btn.btn-secondary.btn-block.my-3{href: "/orders/done/#{@order_detail.id}", role: "button"}
+        <i class="fas fa-wine-bottle"></i> DONE
+    - else
+      %a.btn.btn-secondary.btn-block.my-3{href: "/orders/done/#{@order_detail.id}", role: "button"}
+        <i class="fas fa-wine-bottle"></i> キャンセル
+      %a.btn.btn-secondary.btn-block.my-3{href: "/orders/done_by_user/#{@order_detail.id}?recipe_id=#{@order_detail.recipe_id}&user_id=#{@order_detail.user_id}", role: "button"}
+        <i class="fas fa-wine-bottle"></i> DONE
