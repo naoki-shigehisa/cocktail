@@ -15,7 +15,18 @@
           <i class="fas fa-cocktail"></i> 注文する
   
   - else
-    %ul.nav.nav-pills.nav-fill.mt-3
+    - unless @assessment.nil?
+      %a.btn.text-white.btn-secondary.btn-block.btn-sm
+        飲んだ<i class="fas fa-wine-bottle"></i>
+    - else
+      %form{:name => "form_1", :method => "post", :action => "/reviews/create"}
+        %input{:type => "hidden", :name => "user_id", :value => "#{@current_user.id}"}
+        %input{:type => "hidden", :name => "recipe_id", :value => "#{@recipe_detail.id}"}
+        %input{:type => "hidden", :name => "assessment", :value => 1}
+        %a.btn.btn-light.btn-block.btn-sm{:href => "javascript:form_1.submit()"}
+          飲んだ<i class="fas fa-wine-bottle"></i>に登録
+    
+    %ul.nav.nav-pills.nav-fill.mt-1
       - @assessments.each do |assessment|
         %li.nav-item
           - if @assessment == assessment.id
