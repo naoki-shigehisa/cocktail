@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   namespace :users do
+    get 'ranking', to: 'index#ranking'
     get 'login_page', to: 'index#login_page'
     get 'login', to: 'index#login'
     get 'logout', to: 'index#logout'
