@@ -97,8 +97,11 @@ class Recipes::IndexController < ApplicationController
     current_user_id = User.current_user_id(cookies)
     unless current_user_id.nil?
       @recipes = Recipe.recipes_drank_array(current_user_id)
+      favorite_material_id = Review.get_favorite_material_id(current_user_id)
+      @favorite_material = Material.find(favorite_material_id)
     else
       @recipes = []
+      @favorite_material = nil
     end
   end
 end
