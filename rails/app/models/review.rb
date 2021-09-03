@@ -38,12 +38,16 @@ class Review < ApplicationRecord
     review_count = self.user.reviews
                     .where.not(assessment_id: 1)
                     .count
-    if review_count < 5
+    if review_count < 3
       self.user.update(rank_id: 1)
-    elsif review_count < 10
+    elsif review_count < 5
       self.user.update(rank_id: 2)
-    elsif review_count < 30
+    elsif review_count < 10
       self.user.update(rank_id: 3)
+    elsif review_count < 30
+      self.user.update(rank_id: 4)
+    elsif review_count < 50
+      self.user.update(rank_id: 4)
     else
       self.user.update(rank_id: 4)
     end

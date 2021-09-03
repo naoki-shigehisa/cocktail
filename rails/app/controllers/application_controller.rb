@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :user_info
   def user_info
     current_user = User.current_user(cookies)
-    @current_user_id = current_user.id
-    @user_rank = current_user.rank
+    @current_user_id = current_user&.id
+    @user_rank = current_user&.rank
   end
 
   def welcome
