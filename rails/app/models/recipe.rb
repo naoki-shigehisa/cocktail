@@ -126,7 +126,7 @@ class Recipe < ApplicationRecord
       .eager_load(:reviews)
       .where(reviews: {user_id: user_id})
       .order(created_at: :desc)
-      .preload(:style,:tech,:alcohol,:reviews,recipe_materials: :material)
+      .preload(:style,:tech,:alcohol,:reviews,recipe_materials: :material,reviews: :assessment)
       .map{|r|
         {
           "id": r.id,
