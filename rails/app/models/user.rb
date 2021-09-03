@@ -27,4 +27,10 @@ class User < ApplicationRecord
       .where(name: name, password: password)
       .pluck(:id)
   end
+
+  def self.get_user_ranking
+    self
+      .where.not(review_count: 0)
+      .order(review_count: :desc)
+  end
 end

@@ -1,4 +1,9 @@
 class Users::IndexController < ApplicationController
+  # ユーザーランキング
+  def ranking
+    @user_ranking = User.get_user_ranking
+  end
+
   # ログインページ
   def login_page
     @message = !params[:message].nil?
