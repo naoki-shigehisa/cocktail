@@ -29,7 +29,7 @@ class Review < ApplicationRecord
           .pluck(:id)
       }
       .flatten
-      .group_by(&:itself).max_by{|_,v| v.size}.first
+      .group_by(&:itself).max_by{|_,v| v.size}&.first
   end
 
   private

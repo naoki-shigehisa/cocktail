@@ -4,6 +4,10 @@
       .list-group-item
         .row.m-0.p-0
           .col.text-left.m-0.p-0
+            %span.badge.badge-pill{ style: "background-color: #{u.rank.background_color}; color: #{u.rank.text_color};" }
+              = u.rank.name
+        .row.m-0.p-0
+          .col.text-left.m-0.p-0
             %span.mr-1
               = i + 1
               位 

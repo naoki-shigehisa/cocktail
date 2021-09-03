@@ -98,7 +98,11 @@ class Recipes::IndexController < ApplicationController
     unless current_user_id.nil?
       @recipes = Recipe.recipes_drank_array(current_user_id)
       favorite_material_id = Review.get_favorite_material_id(current_user_id)
-      @favorite_material = Material.find(favorite_material_id)
+      unless favorite_material_id.nil?
+        @favorite_material = Material.find(favorite_material_id)
+      else
+        @favorite_material = nil
+      end
     else
       @recipes = []
       @favorite_material = nil
