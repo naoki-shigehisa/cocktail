@@ -9,6 +9,8 @@ class Review < ApplicationRecord
   scope :find_by_user, -> (user_id) { where(user_id: user_id) }
   scope :find_by_user_and_recipe, -> (recipe_id, user_id) { where(recipe_id: recipe_id, user_id: user_id) }
 
+  before_save :update_user_rank
+
   def self.get_assessment(recipe_id, user_id)
     self
       .find_by_user_and_recipe(recipe_id, user_id)
@@ -28,5 +30,22 @@ class Review < ApplicationRecord
       }
       .flatten
       .group_by(&:itself).max_by{|_,v| v.size}.first
+  end
+
+  private
+
+  def update_user_rank
+    review_count = self.user.reviews
+                    .where.not(assessment_id: 1)
+                    .count
+    if review_count < 5
+      self.user.update(rank_id: 1)
+    elsif review_count < 10
+      self.user.update(rank_id: 2)
+    elsif review_count < 30
+      self.user.update(rank_id: 3)
+    else
+      self.user.update(rank_id: 4)
+    end
   end
 end

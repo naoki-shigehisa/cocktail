@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :orders
   has_many :recipes
 
+  belongs_to :rank
+
   def self.current_user_id(cookies)
     if cookies[:user_id]
       cookies[:user_id]

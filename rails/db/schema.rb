@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_06_083050) do
+ActiveRecord::Schema.define(version: 2021_09_03_060556) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 2021_06_06_083050) do
     t.bigint "user_id"
     t.index ["recipe_id"], name: "index_orders_on_recipe_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "ranks", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "background_color"
+    t.string "text_color"
   end
 
   create_table "recipe_materials", charset: "utf8mb4", force: :cascade do |t|
@@ -98,6 +106,8 @@ ActiveRecord::Schema.define(version: 2021_06_06_083050) do
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "rank_id", null: false
+    t.index ["rank_id"], name: "index_users_on_rank_id"
   end
 
   add_foreign_key "orders", "recipes"
@@ -109,4 +119,5 @@ ActiveRecord::Schema.define(version: 2021_06_06_083050) do
   add_foreign_key "recipes", "teches"
   add_foreign_key "recipes", "users"
   add_foreign_key "reviews", "recipes"
+  add_foreign_key "users", "ranks"
 end

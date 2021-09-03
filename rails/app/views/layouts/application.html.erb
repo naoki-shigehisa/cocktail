@@ -51,7 +51,11 @@
         </ul>
       </div>
     </nav>
-
+    <div class="my-1">
+      <span class="badge badge-pill" style="background-color: <%=@user_rank.background_color%>; color: <%=@user_rank.text_color%>;">
+        <%= @user_rank.name %>ランク
+      </span>
+    </div>
     <%= yield %>
   </body>
 </html>
