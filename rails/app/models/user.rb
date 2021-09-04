@@ -31,6 +31,7 @@ class User < ApplicationRecord
   def self.get_user_ranking
     self
       .preload(:rank)
+      .where.not(id: 1)
       .where.not(review_count: 0)
       .order(review_count: :desc)
   end
