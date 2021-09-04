@@ -33,7 +33,9 @@ class Recipes::RandomChoiceController < ApplicationController
       material_mode = DEFAULT_MODE
     end
 
-    @recipes = Recipe.recipes_by_terms(style, tech, alcohol).can_recipes_by_term_array(@choice_materials, material_mode.to_i)
+    @recipes = Recipe
+                .recipes_by_terms(style, tech, alcohol)
+                .can_recipes_by_term_array(@choice_materials, material_mode.to_i)
     if @recipes.empty?
       @message = 1
     end

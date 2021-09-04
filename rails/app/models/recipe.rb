@@ -74,7 +74,7 @@ class Recipe < ApplicationRecord
   def self.can_recipes_by_term_array(material_ids, mode)
     recipes = self.can_recipes_array
     
-    recipe_ids = recipes.map{|r| r[:id]}
+    recipe_ids = recipes.pluck(:id)
     materials = RecipeMaterial
                   .select(:id,:recipe_id,:material_id,:option_flag)
                   .where(recipe_id: recipe_ids, option_flag: 0)

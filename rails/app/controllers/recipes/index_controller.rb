@@ -12,23 +12,6 @@ class Recipes::IndexController < ApplicationController
     material = params[:material]
     material_mode = params[:material_mode]
 
-    @recipes = Recipe
-    if style and style != DEFAULT_MODE
-      @recipes = @recipes.narrow_style(style)
-    else
-      style = DEFAULT_MODE
-    end
-    if tech and tech != DEFAULT_MODE
-      @recipes = @recipes.narrow_tech(tech)
-    else
-      tech = DEFAULT_MODE
-    end
-    if alcohol and alcohol != DEFAULT_MODE
-      @recipes = @recipes.narrow_alcohol(alcohol)
-    else
-      alcohol = DEFAULT_MODE
-    end
-
     if choice_materials
       @choice_materials = choice_materials.split(',')
       if material
@@ -49,7 +32,10 @@ class Recipes::IndexController < ApplicationController
     unless material_mode
       material_mode = DEFAULT_MODE
     end
-    @recipes = @recipes.can_recipes_by_term_array(@choice_materials, material_mode.to_i)
+    
+    @recipes = Recipe
+                .recipes_by_terms(style, tech, alcohol)
+                .can_recipes_by_term_array(@choice_materials, material_mode.to_i)
 
     current_user = User.current_user_id(cookies)
     unless current_user.nil?
