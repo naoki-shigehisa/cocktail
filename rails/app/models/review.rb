@@ -9,7 +9,8 @@ class Review < ApplicationRecord
   scope :find_by_user, -> (user_id) { where(user_id: user_id) }
   scope :find_by_user_and_recipe, -> (recipe_id, user_id) { where(recipe_id: recipe_id, user_id: user_id) }
 
-  before_save :update_user_rank
+  after_save :update_user_rank
+  after_save :create_user_badge
 
   def self.get_assessment(recipe_id, user_id)
     self
@@ -50,6 +51,28 @@ class Review < ApplicationRecord
       self.user.update(rank_id: 5, review_count: review_count)
     else
       self.user.update(rank_id: 6, review_count: review_count)
+    end
+  end
+
+  def create_user_badge
+    recipe_materials = self.recipe.materials
+                        .where(alcohol_flag: true)
+    user_materials = self.user.reviews
+                        .includes(:materials)
+                        .where.not(assessment_id: 1)
+                        .where(materials: {alcohol_flag: true})
+                        .map{|review| 
+                          review
+                            .materials
+                            .pluck(:id)
+                        }
+                        .flatten
+
+    user_id = self.user.id
+    recipe_materials.each do |material|
+      if user_materials.count(material.id) >= 5
+        UserMaterialBadge.find_or_create_by(user_id: user_id, material_id: material.id)
+      end
     end
   end
 end

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :orders
   has_many :recipes
+  has_many :user_material_badges
 
   belongs_to :rank
 

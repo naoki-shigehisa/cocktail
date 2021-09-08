@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_130936) do
+ActiveRecord::Schema.define(version: 2021_09_08_133401) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(version: 2021_09_08_130936) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_material_badges", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "material_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["material_id"], name: "index_user_material_badges_on_material_id"
+    t.index ["user_id"], name: "index_user_material_badges_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "password"
@@ -121,5 +130,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_130936) do
   add_foreign_key "recipes", "teches"
   add_foreign_key "recipes", "users"
   add_foreign_key "reviews", "recipes"
+  add_foreign_key "user_material_badges", "materials"
+  add_foreign_key "user_material_badges", "users"
   add_foreign_key "users", "ranks"
 end
