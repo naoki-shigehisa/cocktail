@@ -59,6 +59,11 @@
         <span class="badge badge-pill" style="background-color: <%=@user_rank.background_color%>; color: <%=@user_rank.text_color%>;">
           <%= @user_rank.name %>
         </span>
+        <% @user_material_badges.each do |material_badge| %>
+          <span class="badge badge-pill badge-secondary">
+            <%= material_badge.material.name %>マスター
+          </span>
+        <% end %>
       </div>
     <% end %>
     <%= yield %>

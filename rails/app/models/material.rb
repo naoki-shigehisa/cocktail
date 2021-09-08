@@ -1,5 +1,6 @@
 class Material < ApplicationRecord
   has_many :recipe_materials
+  has_many :user_material_badges
 
   # 材料の情報を取得
   def self.detail(material_id)

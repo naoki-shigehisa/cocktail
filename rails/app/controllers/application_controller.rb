@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
     current_user = User.current_user(cookies)
     @current_user_id = current_user&.id
     @user_rank = current_user&.rank
+    @user_material_badges = UserMaterialBadge.get_badges_by_user(@current_user_id)
   end
 
   def welcome
