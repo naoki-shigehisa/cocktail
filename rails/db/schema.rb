@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_135201) do
+ActiveRecord::Schema.define(version: 2021_09_08_130936) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_09_03_135201) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "rank_id", null: false
     t.integer "review_count", default: 0, null: false
+    t.boolean "show_flag", default: true
     t.index ["rank_id"], name: "index_users_on_rank_id"
   end
 
