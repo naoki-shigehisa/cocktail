@@ -24,31 +24,31 @@
       <div class="collapse navbar-collapse" id="responsiveMenu">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/recipes/menu?style=0&tech=0&alcohol=0">Recipes</a>
+            <a class="nav-link" href="/recipes/menu?style=0&tech=0&alcohol=0">レシピ一覧</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/materials/menu">Materials</a>
+            <a class="nav-link" href="/recipes/menu_only_name">レシピ名一覧</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/recipes/menu_only_name">Recipes Only Name</a>
+            <a class="nav-link" href="/materials/menu">材料一覧</a>
           </li>
           <% unless @current_user_id.nil? %>
             <li class="nav-item">
-              <a class="nav-link" href="/recipes/drank">Recipes You Drank</a>
+              <a class="nav-link" href="/recipes/drank">今まで飲んだレシピ</a>
             </li>
           <% end %>
           <li class="nav-item">
-            <a class="nav-link" href="/recipes/random_choice/terms?style=0&tech=0&alcohol=0">Random Choice</a>
+            <a class="nav-link" href="/recipes/random_choice/terms?style=0&tech=0&alcohol=0">ランダムチョイス</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/users/ranking">User Ranking</a>
+            <a class="nav-link" href="/users/ranking">ユーザーランキング</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/orders/myorder">My Orders</a>
+            <a class="nav-link" href="/orders/myorder">あなたの注文</a>
           </li>
           <% if [1, 3].include?(@current_user_id) %>
             <li class="nav-item">
-              <a class="nav-link" href="/orders">Orders</a>
+              <a class="nav-link" href="/orders">注文一覧</a>
             </li>
           <% end %>
         </ul>
