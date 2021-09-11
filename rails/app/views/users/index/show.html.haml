@@ -1,0 +1,32 @@
+.m-3
+  .my-2
+    %h4.font-weight-bold.m-0
+      = @user.name
+    .mb-1
+      %span.badge.badge-pill{ style: "background-color: #{@user.rank.background_color}; color: #{@user.rank.text_color};" }
+        = @user.rank.name
+      - @user_material_badges.each do |material_badge|
+        %span.badge.badge-pill.badge-secondary
+          = "#{material_badge.material.name}マスター"
+    .font-weight-bold.small
+      = "飲んだレシピ数：#{@recipes.size}件"
+    - unless @favorite_material.nil?
+      .font-weight-bold.small
+        = "お気に入り：#{@favorite_material.name}"
+  %ul.list-group  
+    - @recipes.each do |r|
+      %a.list-group-item{href: "/recipes/detail/#{r[:id]}"}
+        .d-flex.align-items-center
+          %span.text-dark.font-weight-bold
+            = r[:name]
+            - unless r[:assessment].nil?
+              %span.badge.badge-pill.badge-secondary.ml-1
+                = r[:assessment]
+        %span.badge.badge-pill.badge-light.text-secondary
+          = r[:base]
+        %span.badge.badge-pill.badge-light.text-secondary
+          = r[:style]
+        %span.badge.badge-pill.badge-light.text-secondary
+          = r[:tech]
+        %span.badge.badge-pill.badge-light.text-secondary
+          = r[:alcohol]

@@ -1,4 +1,23 @@
 class Users::IndexController < ApplicationController
+  # ユーザーページ
+  def show
+    @user = User.preload(:rank).find(params[:id])
+
+    unless @user.show_flag
+      redirect_to '/'
+    end
+
+    @recipes = Recipe.recipes_drank_array(@user.id)
+    @user_material_badges = UserMaterialBadge.get_badges_by_user(@user.id)
+
+    favorite_material_id = Review.get_favorite_material_id(@user.id)
+    unless favorite_material_id.nil?
+      @favorite_material = Material.find(favorite_material_id)
+    else
+      @favorite_material = nil
+    end
+  end
+  
   # ユーザーランキング
   def ranking
     @user_ranking = User.get_user_ranking
