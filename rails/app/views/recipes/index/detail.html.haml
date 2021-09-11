@@ -6,9 +6,9 @@
         %span.badge.badge-pill.badge-secondary.mb-1
           = "オリジナル by #{@recipe_detail.user.name}" 
     .col.text-right.m-0.p-0
-      - if @excellent_count != 0
+      - if @recipe_detail.excellent_count != 0
         .balloon4.small.text-center
-          = "#{@excellent_count} Excellent!!"
+          = "#{@recipe_detail.excellent_count} Excellent!!"
   
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
     %h4

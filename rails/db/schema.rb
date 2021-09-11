@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_133401) do
+ActiveRecord::Schema.define(version: 2021_09_11_135751) do
 
   create_table "alcohols", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_133401) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.integer "excellent_count", default: 0
     t.index ["alcohol_id"], name: "fk_rails_fbd57f879a"
     t.index ["style_id"], name: "fk_rails_9754ad668b"
     t.index ["tech_id"], name: "fk_rails_8c8778d2c9"
