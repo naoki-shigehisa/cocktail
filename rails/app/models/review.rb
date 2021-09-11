@@ -11,6 +11,7 @@ class Review < ApplicationRecord
 
   after_save :update_user_rank
   after_save :create_user_badge
+  after_save :update_excellent_count
 
   def self.get_assessment(recipe_id, user_id)
     self
@@ -74,5 +75,14 @@ class Review < ApplicationRecord
         UserMaterialBadge.find_or_create_by(user_id: user_id, material_id: material.id)
       end
     end
+  end
+
+  def update_excellent_count
+    excellent_count = self
+                        .recipe
+                        .reviews
+                        .where(assessment_id: 4)
+                        .count
+    self.recipe.update(excellent_count: excellent_count)
   end
 end

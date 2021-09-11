@@ -131,6 +131,9 @@
   %ul.list-group  
     - @recipes.each do |r|
       %a.list-group-item{href: "/recipes/detail/#{r[:id]}"}
+        - if r[:excellent_count] != 0
+          .balloon4.text-dark.small.text-center
+            = "#{r[:excellent_count]} Excellent!!"
         .d-flex.align-items-center
           %span.text-dark.font-weight-bold
             = r[:name]
@@ -145,3 +148,35 @@
           = r[:tech]
         %span.badge.badge-pill.badge-light.text-secondary
           = r[:alcohol]
+
+:css
+  .balloon4 {
+    position: relative;
+    width: 100px;
+    margin: 0 0 5px -15px;
+    padding: 0 5px 0 5px;
+    background: #dcdcdc;
+    border-radius: 30px;
+  }
+
+  .balloon4:before {  
+    content: "";
+    position: absolute;
+    left: 15px;
+    width: 6px;
+    height: 5px;
+    bottom: -9px;
+    background: #dcdcdc;
+    border-radius: 50%;
+  }
+
+  .balloon4:after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    width: 7px;
+    height: 6px;
+    bottom: -6px;
+    background: #dcdcdc;
+    border-radius: 50%;
+  }
