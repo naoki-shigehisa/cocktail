@@ -59,6 +59,7 @@ class Recipes::IndexController < ApplicationController
     recipe_id = params[:id]
 
     @recipe_detail = Recipe.detail(recipe_id)
+    @excellent_count = @recipe_detail.get_excellent_count
     @materials = RecipeMaterial.recipe_materials_array(recipe_id)
     @assessments = Assessment.for_review
 

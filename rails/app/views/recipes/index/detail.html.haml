@@ -1,8 +1,15 @@
 - choice_style = "font-size: 0.8rem"
-.m-3
-  - unless @recipe_detail.user_id.nil?
-    %span.badge.badge-pill.badge-secondary.mb-1
-      = "オリジナル by #{@recipe_detail.user.name}" 
+.mx-3
+  .row.text-dark.m-0.p-0
+    .col.text-left.m-0.p-0
+      - unless @recipe_detail.user_id.nil?
+        %span.badge.badge-pill.badge-secondary.mb-1
+          = "オリジナル by #{@recipe_detail.user.name}" 
+    .col.text-right.m-0.p-0
+      - if @excellent_count != 0
+        .balloon4.small.text-center
+          = "#{@excellent_count} Excellent!!"
+  
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
     %h4
       = @recipe_detail.name
@@ -94,3 +101,34 @@
             - if m[:option_flag]
               .col.text-right.m-0.p-0
                 %span.text-muted オプション
+
+:css
+  .balloon4 {
+    position: relative;
+    margin: 0 0 5px 40px;
+    padding: 0 5px 0 5px;
+    background: #dcdcdc;
+    border-radius: 30px;
+  }
+
+  .balloon4:before {  
+    content: "";
+    position: absolute;
+    left: -19px;
+    width: 7px;
+    height: 6px;
+    bottom: -5px;
+    background: #dcdcdc;
+    border-radius: 50%;
+  }
+
+  .balloon4:after {
+    content: "";
+    position: absolute;
+    left: -12px;
+    width: 10px;
+    height: 9px;
+    bottom: -2px;
+    background: #dcdcdc;
+    border-radius: 50%;
+  }

@@ -68,6 +68,7 @@ class Recipes::RandomChoiceController < ApplicationController
     else
       id = @recipes.sample[:id]
       @recipe_detail = Recipe.detail(id)
+      @excellent_count = @recipe_detail.get_excellent_count
       @materials = RecipeMaterial.recipe_materials_array(id)
       @assessments = Assessment.for_review
       

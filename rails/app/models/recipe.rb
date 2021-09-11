@@ -16,8 +16,15 @@ class Recipe < ApplicationRecord
   def self.detail(recipe_id)
     self
       .select(:id,:name,:style_id,:tech_id,:alcohol_id,:user_id)
-      .joins(:style,:tech,:alcohol)
+      .preload(:style,:tech,:alcohol)
       .find(recipe_id)
+  end
+
+  def get_excellent_count
+    self
+      .reviews
+      .where(assessment_id: 4)
+      .count
   end
 
   # 全てのレシピ情報を取得
