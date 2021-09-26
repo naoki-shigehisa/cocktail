@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'random_choice/order_secret', to: 'random_choice#order_secret'
   end
 
-  namespace :orders do
+  namespace "orders" do
     get '/', to: 'index#index'
     get '/myorder', to: 'index#myorder'
     get '/detail/:id', to: 'index#detail'
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get '/done_by_user/:id', to:'index#done_by_user'
   end
 
-  namespace :users do
+  namespace "users" do
     get 'show/:id', to: 'index#show'
     get 'ranking', to: 'index#ranking'
     get 'login_page', to: 'index#login_page'
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get 'logout', to: 'index#logout'
   end
 
-  namespace :reviews do
+  namespace "reviews" do
     post 'create', to: 'index#create'
   end
 
