@@ -61,6 +61,7 @@ class Recipes::IndexController < ApplicationController
     @recipe_detail = Recipe.detail(recipe_id)
     @materials = RecipeMaterial.recipe_materials_array(recipe_id)
     @assessments = Assessment.for_review
+    @reviews = Review.get_reviews_from_recipe_id(recipe_id)
 
     @current_user = User.current_user(cookies)
     unless @current_user.nil?

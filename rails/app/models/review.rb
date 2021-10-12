@@ -34,6 +34,15 @@ class Review < ApplicationRecord
       .group_by(&:itself).max_by{|_,v| v.size}&.first
   end
 
+  def self.get_reviews_from_recipe_id(recipe_id)
+    self
+      .where(recipe_id: recipe_id)
+      .where.not(assessment_id: 0)
+      .includes(:user)
+      .where(user: {show_flag: true})
+      .preload(:assessment)
+  end
+
   private
 
   def update_user_rank
