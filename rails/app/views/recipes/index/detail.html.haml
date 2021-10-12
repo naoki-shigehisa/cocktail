@@ -102,6 +102,20 @@
               .col.text-right.m-0.p-0
                 %span.text-muted オプション
 
+  - if @reviews.count != 0  
+    %p.font-weight-bold.mb-1.mt-3 評価
+    %hr.mt-0
+    - @reviews.each do |r|
+      %a.list-group-item{href: "/users/show/#{r.user.id}"}
+        .container.m-0.p-0
+          .row.m-0.p-0
+            .col.text-left.m-0.p-0
+              %span.text-dark
+                = r.assessment.name
+            .col.text-right.m-0.p-0
+              %span.text-dark
+                %span.mr-1 by
+                = r.user.name
 :css
   .balloon4 {
     position: relative;

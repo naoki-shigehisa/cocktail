@@ -70,6 +70,7 @@ class Recipes::RandomChoiceController < ApplicationController
       @recipe_detail = Recipe.detail(id)
       @materials = RecipeMaterial.recipe_materials_array(id)
       @assessments = Assessment.for_review
+      @reviews = Review.get_reviews_from_recipe_id(id)
       
       @current_user = User.current_user(cookies)
       unless @current_user.nil?
