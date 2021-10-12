@@ -37,7 +37,7 @@ class Review < ApplicationRecord
   def self.get_reviews_from_recipe_id(recipe_id)
     self
       .where(recipe_id: recipe_id)
-      .where.not(assessment_id: 0)
+      .where.not(assessment_id: 1)
       .includes(:user)
       .where(user: {show_flag: true})
       .preload(:assessment)
